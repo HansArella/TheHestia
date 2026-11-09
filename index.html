@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Field Trainer – FPS AI Lab</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Field Trainer – FPS AI Lab</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ffd23f'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle'%3E%F0%9F%8E%AF%3C/text%3E%3C/svg%3E">
 <style>
 :root{--bg:#0d1110;--ink:#e6e9df;--mut:#8a9488;--acc:#e0a526;--red:#d9483b;color-scheme:dark}
 *{box-sizing:border-box}html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font:13px/1.4 Bahnschrift,"Arial Narrow",system-ui,sans-serif;overflow:hidden}
@@ -114,6 +114,16 @@ body:not(.adm) #home .ed,body:not(.adm) #home .cd.new{display:none!important}
 #end.win .bx,#end.lose .bx{width:min(760px,94vw)}
 #end .big{font-size:20px;font-weight:700;margin-bottom:10px}#end .rep{text-align:left;font-weight:400;font-size:14px;margin-top:10px;border:3px solid #14142b;border-radius:14px;padding:8px 14px;background:#fff3c4;color:#14142b}#end .rep ul{margin:4px 0 0 18px;padding:0}#end.lose .rep{background:#2a171c;border-color:#ff2e4d;color:#f3d6da}#end .bx{max-height:94vh;overflow:auto}
 @keyframes pop{0%{transform:scale(.3);opacity:0}100%{transform:scale(1);opacity:1}}@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-14px)}75%{transform:translateX(14px)}}
+body:not(.adm) #home .tune,body:not(.adm) #home .mb[data-m=ava]{display:none!important}
+#home .g2{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+#home .row2 input,#home .row2 select{width:auto;background:#fff;color:#14142b;border:2px solid #14142b;border-radius:10px;padding:6px 10px;font:inherit}#home .row2 a{color:#ff2e7e;font-weight:700}#home pre{margin:6px 0 0;white-space:pre-wrap}
+#spec{left:50%;top:104px;transform:translateX(-50%);color:#fff;background:#14142bcc;padding:4px 14px;border-radius:12px;font-weight:700}#spec:empty{display:none}
+#tcn{position:fixed;inset:0;z-index:6;pointer-events:none;display:none;touch-action:none;user-select:none;-webkit-user-select:none}#tcn *{pointer-events:auto;touch-action:none}
+#jy{position:absolute;left:calc(22px + env(safe-area-inset-left,0px));bottom:calc(26px + env(safe-area-inset-bottom,0px));width:140px;height:140px;border-radius:50%;background:#ffffff33;border:3px solid #ffffffaa}#jk{position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px;border-radius:50%;background:#ffffffcc;pointer-events:none!important}
+#lk{position:absolute;right:0;top:0;bottom:0;width:52%}#bt{position:absolute;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(3,64px);gap:10px}
+#bt button,#sp button{width:64px;height:64px;border-radius:50%;margin:0;padding:0;border:3px solid #14142b;background:#ffd23fdd;color:#14142b;font:700 11px sans-serif}#bt .f{grid-column:1/-1;width:auto;height:86px;border-radius:44px;background:#ff5c8add;font-size:18px}#sp{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:none;gap:14px}
+body.mob #hint,body.mob #think{display:none}
+@media(max-width:700px){#home{flex-direction:column}#home aside{display:block;width:auto;padding:8px 10px;border-right:0;border-bottom:2px solid #14142b18}#home .lg{display:none}#home nav{display:flex;gap:6px;overflow-x:auto}#home nav button{width:auto;white-space:nowrap;margin:0;padding:8px 12px;font-size:13px}#home #who{display:none}#home main{padding:14px}#home h1{font-size:34px}}
 </style></head><body>
 <canvas id="c"></canvas>
 <div class="h" id="zone"></div>
@@ -157,7 +167,7 @@ const scene=new THREE.Scene();scene.background=new THREE.Color(0x9db0b8);scene.f
 const cam=new THREE.PerspectiveCamera(75,1,.05,300),acam=new THREE.PerspectiveCamera(80,300/170,.05,300);cam.rotation.order='YXZ';scene.add(cam);
 function rs(){W=innerWidth;H=innerHeight;ren.setSize(W,H);cam.aspect=W/H;cam.updateProjectionMatrix()}addEventListener('resize',rs);rs();
 scene.add(new THREE.HemisphereLight(0xcfe2ff,0x4a4030,.85));
-const sun=new THREE.DirectionalLight(0xfff0d0,.9);sun.position.set(40,60,20);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-32,right:32,top:32,bottom:-32,far:120});scene.add(sun);
+const sun=new THREE.DirectionalLight(0xfff0d0,.9);sun.position.set(40,60,20);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-65,right:65,top:65,bottom:-65,far:200});scene.add(sun);
 // procedural materials (remote textures are blocked on hosted pages)
 function tex(d,rep){const c=document.createElement('canvas');c.width=c.height=256;d(c.getContext('2d'));const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rep,rep);return t}
 function grain(g,b,n){g.fillStyle=b;g.fillRect(0,0,256,256);for(let i=0;i<n;i++){const v=Math.random()*255|0;g.fillStyle=`rgba(${v},${v},${v},.12)`;g.fillRect(Math.random()*256,Math.random()*256,3,3)}}
@@ -195,7 +205,7 @@ const f=new THREE.Mesh(new THREE.PlaneGeometry(.22,.22),new THREE.MeshBasicMater
 function setVM(){if(vm)cam.remove(vm);vm=buildVM(GUNS[lo[cur]]);vm.scale.setScalar(.8);cam.add(vm)}setVM();
 // units
 const SP={R:[[-8,-21],[8,-21],[0,-21]],B:[[-8,21],[8,21],[0,21]]};
-const P={name:'You',t:'B',x:0,z:42,yaw:0,pitch:0,hp:100,kills:0,deaths:0,rt:0,lh:0,mv:0,wt:0};
+const P={name:'You',t:'B',x:0,z:42,yaw:0,pitch:0,hp:200,kills:0,deaths:0,rt:0,lh:0,mv:0,wt:0};
 const units=()=>[P,...bots];
 function spawn(u){const a=SP[u.t],s=a[Math.random()*a.length|0];u.x=s[0]+rnd(-.6,.6);u.z=s[1]+rnd(-.6,.6);u.yaw=u.t==='R'?Math.PI:0}
 function push(p,r){for(const o of solids){const g=o.geometry.parameters;if((p.fy||0)>=g.height-.35)continue;const hx=g.width/2,hz=g.depth/2,dx=p.x-o.position.x,dz=p.z-o.position.z;let ox=dx-cl(dx,-hx,hx),oz=dz-cl(dz,-hz,hz),d=Math.hypot(ox,oz);if(d<r){if(d<1e-4){ox=1;oz=0;d=1}p.x+=ox/d*(r-d);p.z+=oz/d*(r-d)}}}
@@ -212,7 +222,7 @@ const d=s.dist;
 return {move:d>far?1:(d<far*.5?-.6:.1),strafe:Math.sin(s.time*(1+p.strafe*4))*(.4+p.strafe),shoot:true,say:'Target in sight at '+d+'m. '+(d>far?'Closing in':'Holding range')+', strafing and firing.'};`;
 let sel=null;
 function setCode(b,c){try{b.fn=new Function('s','p',c);b.code=c;return ''}catch(e){return e.message}}
-function addBot(name,team,code,p){const g=makeBot(team),b={name,t:team,x:0,z:0,yaw:0,hp:100,kills:0,deaths:0,g,p:p||{aim:.5,strafe:.5,aggr:.5},stat:{k:0,dd:0,dt:0,d:0},best:-1e9,lt:0,tk:0,cd:0,act:{},hist:[],wt:0,rt:0,vis:false,s:{},stk:0,esc:0};
+function addBot(name,team,code,p){const g=makeBot(team),b={name,t:team,x:0,z:0,yaw:0,hp:200,kills:0,deaths:0,g,p:p||{aim:.5,strafe:.5,aggr:.5},stat:{k:0,dd:0,dt:0,d:0},best:-1e9,lt:0,tk:0,cd:0,act:{},hist:[],wt:0,rt:0,vis:false,s:{},stk:0,esc:0};
 g.traverse(o=>o.userData.b=b);spawn(b);scene.add(g);setCode(b,code||DEF);bots.push(b);if(!sel)sel=b;refresh();return b}
 function dmg(u,d,src){if(u.hp<=0)return;if(u!==P&&u.g){u.fl=.12;if(src===P)dnum(u,d)}u.hp-=d;if(src&&src.ms)src.ms.dd+=d;if(u.ms)u.ms.dt+=d;if(u===P&&FS.tk==null)FS.tk=REC.t;if(src===P&&u!==P&&FS.dl==null)FS.dl=REC.t;if(src&&src.stat)src.stat.dd+=d;if(u.stat)u.stat.dt+=d;if(u===P){P.lh=0;hv=cl(.5+d/40,0,1);shake=.25;sfx(.25,.5,400,1)}if(src===P&&u!==P){$('hm').style.display='block';setTimeout(()=>$('hm').style.display='none',120);sfx(.05,.4,3000)}if(u.hp<=0)kill(u,src)}
 function kill(u,s){if(REC.on)REC.ev.push([+REC.t.toFixed(1),(s&&s.name)||'The zone',u.name]);u.deaths++;if(u.stat)u.stat.d++;if(s&&s!==u){s.kills++;if(s.stat)s.stat.k++}const e=document.createElement('div');e.textContent=`${s?s.name:'?'}  ✕  ${u.name}`;$('feed').prepend(e);setTimeout(()=>e.remove(),5000);u.rt=3;u.slow=0;u.burn=0;u.bl=0;if(u!==P){spark(new THREE.Vector3(u.x,1,u.z),30,0xb01818,6);u.g.visible=false}}
@@ -249,11 +259,11 @@ if(b){P.ms.h++;dmg(b,w.d*(h.object.userData.head?2:1),P);spark(h.point,6,0xb0181
 function place(k){const x=Math.round(P.x-Math.sin(P.yaw)*6),z=Math.round(P.z-Math.cos(P.yaw)*6),sd=Math.abs(Math.sin(P.yaw))>Math.abs(Math.cos(P.yaw));k==='crate'?box(x,z,1.6,1.6,1.6,'crate'):box(x,z,sd?.6:6,sd?6:.6,3,'conc')}
 function removeT(){ray.set(cam.position,new THREE.Vector3(0,0,-1).applyQuaternion(cam.quaternion));ray.far=30;const h=ray.intersectObjects(solids)[0];if(h&&!h.object.userData.keep){scene.remove(h.object);solids.splice(solids.indexOf(h.object),1)}}
 function pTick(dt){
-if(P.hp<=0){if((P.rt-=dt)<=0){P.hp=100;spawn(P);P.yaw=0;P.pitch=0;gn=3;lo.forEach(k=>ammo[k]=GUNS[k].m)}return}
+if(P.hp<=0){if((P.rt-=dt)<=0){P.hp=MAXHP;spawn(P);P.yaw=0;P.pitch=0;gn=3;lo.forEach(k=>ammo[k]=GUNS[k].m)}return}
 ads=!!(adsM||keys.KeyE);const sp=(keys.ShiftLeft&&!ads?6.5:4.2)*(ads?.6:1),f=(keys.KeyW?1:0)-(keys.KeyS?1:0),s=(keys.KeyD?1:0)-(keys.KeyA?1:0),l=Math.hypot(f,s)||1,sn=Math.sin(P.yaw),cs=Math.cos(P.yaw);
 P.mv=f||s?1:0;P.x+=(-sn*f+cs*s)*sp*dt/l;P.z+=(-cs*f-sn*s)*sp*dt/l;push(P,.45);P.x=cl(P.x,-LX,LX);P.z=cl(P.z,-LZ,LZ);
 {let gh=0;for(const o of solids){const g=o.geometry.parameters;if(Math.abs(P.x-o.position.x)<g.width/2+.3&&Math.abs(P.z-o.position.z)<g.depth/2+.3&&(P.fy||0)>=g.height-.35)gh=Math.max(gh,g.height)}
-P.fy=P.fy||0;P.vy=(P.vy||0)-24*dt;if(keys.Space&&P.fy<=gh+.02)P.vy=9.5;P.fy+=P.vy*dt;if(P.fy<=gh){P.fy=gh;P.vy=0}}P.wt+=dt*sp*1.6*P.mv;P.lh+=dt;if(P.lh>5&&P.hp<100)P.hp=Math.min(100,P.hp+25*dt);
+P.fy=P.fy||0;P.vy=(P.vy||0)-24*dt;if(keys.Space&&P.fy<=gh+.02)P.vy=9.5;P.fy+=P.vy*dt;if(P.fy<=gh){P.fy=gh;P.vy=0}}P.wt+=dt*sp*1.6*P.mv;P.lh+=dt;if(P.lh>5&&P.hp<MAXHP)P.hp=Math.min(MAXHP,P.hp+40*dt);
 if(reloading>0&&(reloading-=dt)<=0){reloading=0;ammo[lo[cur]]=GUNS[lo[cur]].m}if(swap>0)swap-=dt;
 if(fire&&(GUNS[lo[cur]].a||semi)){shoot();semi=0}
 adsT+=((ads&&!reloading?1:0)-adsT)*Math.min(1,dt*10);kick*=.85;fl-=dt;
@@ -295,19 +305,19 @@ $('learn').onchange=e=>learn=e.target.checked;$('self').onchange=e=>selfPlay=e.t
 $('bc').onclick=()=>place('crate');$('bw').onclick=()=>place('wall');$('bx').onclick=removeT;$('br').onclick=()=>layout(curMap);
 // loop
 let last=performance.now(),pt='';
-function loop(now){requestAnimationFrame(loop);const dt=Math.min(.05,(now-last)/1000);last=now;clock+=dt;const ns=cfg.mode==='ava'&&!home?(+cfg.speed||1):1;
-if(RP.on){zg.visible=false;repTick(dt)}else{zg.visible=!home&&!ended;for(let _i=0;_i<ns&&!ended&&!home;_i++){const q=ns>1?.05:dt;if(_i)clock+=q;pTick(q);bots.forEach(b=>bTick(b,q));chk();if(!home){zoneTick(q);fireTick(q);rec(q)}}}
+function loop(now){requestAnimationFrame(loop);const dt=Math.min(.05,(now-last)/1000);last=now;clock+=dt;const ns=cfg.mode==='ava'&&!home?(ADMIN?(cfg.speed===99?1:(+cfg.speed||1)):1):1;
+if(RP.on){zg.visible=false;repTick(dt)}else{zg.visible=!home&&!ended;const _t0=performance.now();for(let _i=0;(_i<ns||(cfg.speed===99&&ADMIN&&cfg.mode==='ava'&&performance.now()-_t0<12&&_i<300))&&!ended&&!home;_i++){const q=Math.min(dt,.05);if(_i)clock+=q;if(!SPEC())pTick(q);bots.forEach(b=>bTick(b,q));chk();if(!home){if(!GT.on&&!LAB.on)zoneTick(q);fireTick(q);rec(q)}}}
 for(let i=nades.length-1;i>=0;i--){const n=nades[i],p=n.m.position,ox=p.x,oz=p.z;n.v.y-=18*dt;p.addScaledVector(n.v,dt);if(p.y<.15){p.y=.15;n.v.y*=-.35;n.v.x*=.65;n.v.z*=.65}
 for(const o of solids){const g=o.geometry.parameters;if(Math.abs(p.x-o.position.x)<g.width/2&&Math.abs(p.z-o.position.z)<g.depth/2&&p.y<g.height){p.x=ox;p.z=oz;n.v.x*=-.5;n.v.z*=-.5;break}}
 if((n.t-=dt)<=0){boom(p.clone(),n.o);scene.remove(n.m);nades.splice(i,1)}}
 for(let i=fx.length-1;i>=0;i--)if(!fx[i].u(dt))fx.splice(i,1);
-if(!RP.on){shake*=.9;cam.position.set(P.x+rnd(-1,1)*shake*.12,1.65+(P.fy||0)+Math.sin(P.wt)*.03*P.mv+rnd(-1,1)*shake*.12,P.z);cam.rotation.set(P.pitch,P.yaw,0)}
-const k=lo[cur],w=GUNS[k];hv*=.95;$('hurt').style.opacity=Math.max(hv,P.hp<35?(35-P.hp)/50:0);$('dead').style.display=P.hp<=0?'grid':'none';
+if(SPEC()){specCam()}else if(!RP.on){shake*=.9;cam.position.set(P.x+rnd(-1,1)*shake*.12,1.65+(P.fy||0)+Math.sin(P.wt)*.03*P.mv+rnd(-1,1)*shake*.12,P.z);cam.rotation.set(P.pitch,P.yaw,0)}
+const k=lo[cur],w=GUNS[k];hv*=.95;$('hurt').style.opacity=Math.max(hv,P.hp<70?(70-P.hp)/100:0);$('dead').style.display=P.hp<=0?'grid':'none';
 $('kn').textContent=P.kills+' KILLS';$('kd').textContent=`${P.deaths} deaths · K/D ${(P.kills/Math.max(1,P.deaths)).toFixed(2)} · grenades ${gn}`;
-$('wn').textContent=w.n+(reloading>0?' · reloading':'');$('am').textContent=w.mel?'MELEE':ammo[k]+' / '+w.m;$('hp').style.width=Math.max(0,P.hp)+'%';$('sl').textContent=`[1] ${GUNS[lo[0]].n}   [2] ${GUNS[lo[1]].n}   [3] ${GUNS[lo[2]].n}   [G] Grenade ×${gn}`;
+$('wn').textContent=w.n+(reloading>0?' · reloading':'');$('am').textContent=w.mel?'MELEE':ammo[k]+' / '+w.m;$('hp').style.width=Math.max(0,P.hp)/2+'%';$('sl').textContent=`[1] ${GUNS[lo[0]].n}   [2] ${GUNS[lo[1]].n}   [3] ${GUNS[lo[2]].n}   [G] Grenade ×${gn}`;
 const t=thinkTxt(sel);if(t!==pt){pt=t;$('think').textContent=t}$('pn').textContent=sel?`AGENT VIEW · ${sel.name}`:'AGENT VIEW';
 ren.setViewport(0,0,W,H);ren.setScissor(0,0,W,H);ren.render(scene,cam);
-if(sel&&sel.hp>0&&innerWidth>700){acam.position.set(sel.x,1.6,sel.z);acam.rotation.set(0,sel.yaw,0);sel.g.visible=false;ren.setViewport(W-316,16,300,170);ren.setScissor(W-316,16,300,170);ren.render(scene,acam);sel.g.visible=true}}
+if(sel&&sel.hp>0&&innerWidth>700&&!SPEC()){acam.position.set(sel.x,1.6,sel.z);acam.rotation.set(0,sel.yaw,0);sel.g.visible=false;ren.setViewport(W-316,16,300,170);ren.setScissor(W-316,16,300,170);ren.render(scene,acam);sel.g.visible=true}}
 let home=true,curMap=0;const cfg={mode:'pva',map:0,ag:['HansArella'],lo:['m4','g19','mp5'],slot:0};
 const MAPS=[['Training Ground','Open yard, two buildings, tower'],['Crossfire Arena','Long barriers and tight lanes'],['Agent Battlefield','Dense crate maze']],
 AGS=[['HansArella','patrol','🎭',{aim:.5,strafe:.5,aggr:.5}],['Reaper','aggressive','💀',{aim:.55,strafe:.7,aggr:.95}],['Ghost','sniper','🎯',{aim:.8,strafe:.2,aggr:.1}],['Bastion','defensive','🛡️',{aim:.6,strafe:.3,aggr:.2}]];
@@ -324,9 +334,9 @@ if(d.w)cfg.lo[GUNS[d.w].s-1]=d.w;hr()};
 $('go').onclick=()=>{
 lo.splice(0,4,...cfg.lo);lo.forEach(k=>ammo[k]=GUNS[k].m);cur=0;gn=3;reloading=0;setVM();bots.splice(0).forEach(b=>scene.remove(b.g));sel=null;layout(cfg.map);
 deployAgents();
-selfPlay=cfg.mode==='ava';$('self').checked=selfPlay;sel=bots[0];refresh();P.hp=100;P.kills=0;P.deaths=0;spawn(P);P.yaw=0;P.pitch=0;P.fy=0;P.vy=0;zt=0;zacc=0;fires.splice(0).forEach(f=>scene.remove(f.m,f.L));bots.forEach(b=>b.ms={sh:0,h:0,dd:0,dt:0});P.ms={sh:0,h:0,dd:0,dt:0};P.name=PNAME||'You';recStart();$('end').className='';ended=false;$('end').style.display='none';home=false;$('home').style.display='none';$('c').requestPointerLock()};
+selfPlay=cfg.mode==='ava';$('self').checked=selfPlay;sel=bots[0];refresh();P.hp=MAXHP;P.kills=0;P.deaths=0;spawn(P);P.yaw=0;P.pitch=0;P.fy=0;P.vy=0;zt=0;zacc=0;fires.splice(0).forEach(f=>scene.remove(f.m,f.L));bots.forEach(b=>b.ms={sh:0,h:0,dd:0,dt:0});P.ms={sh:0,h:0,dd:0,dt:0};P.name=PNAME||'You';recStart();$('end').className='';ended=false;$('end').style.display='none';home=false;$('home').style.display='none';$('c').requestPointerLock()};
 $('menu').onclick=()=>{home=true;$('home').style.display='flex';$('panel').style.display='none';document.exitPointerLock();hr()};
-ren.toneMapping=THREE.ACESFilmicToneMapping;ren.toneMappingExposure=1.15;
+ren.toneMapping=THREE.NoToneMapping;ren.toneMappingExposure=1;
 function buildMap(){solids.splice(0).forEach(o=>scene.remove(o));
 [[0,-25,50,1,6,'conc'],[0,25,50,1,6,'conc'],[-25,0,1,50,6,'conc'],[25,0,1,50,6,'conc']].forEach(a=>box(...a,1));
 [[-3.5,-4,3,.6,3.5,'brick'],[3.5,-4,3,.6,3.5,'brick'],[-3.5,4,3,.6,3.5,'brick'],[3.5,4,3,.6,3.5,'brick'],[-5,0,.6,8,3.5,'brick'],[5,0,.6,8,3.5,'brick'],
@@ -365,7 +375,7 @@ $('es').innerHTML=units().filter(u=>!(ava&&u===P)).map(u=>`<div class="row"><spa
 $('rem').onclick=()=>$('go').click();$('nb').onclick=()=>{$('end').style.display='none';$('menu').click()};
 function pre(name,w,h,tod,fog,f){const t={},p=(i,j,k)=>{if(i<0||j<0||i>=w||j>=h)return;if(k)t[i+','+j]=k;else delete t[i+','+j]};f(p,w,h);return{name,w,h,fog,tod,t,ps:[w>>1,h-2],as:[w>>1,1]}}
 const TT={wall:['Concrete Wall','#a9b4cc'],building:['Building','#ff9b4a'],sand:['Sandbags','#f2d062'],crate:['Crate','#c68a45'],barrel:['Barrel','#ef5350'],fog:['Fog Zone','#b9e3ff'],water:['Water','#3d8bff'],ps:['Player Spawn','#ff2e7e'],as:['Agent Spawn','#8b6cff'],er:['Eraser','#d9d9e3']},
-TOD={day:[0x9db0b8,0xfff0d0,.9,.85],dusk:[0xe39a6e,0xffb070,.7,.6],night:[0x0b1020,0x8fa8ff,.28,.32]};
+TOD={day:[0x9db0b8,0xfff0d0,.9,.85],dusk:[0xc8a58a,0xfff0d0,.9,.85],night:[0x5a6f98,0xfff0d0,.9,.85]};
 const tc=b=>Object.values(b.t).filter(Boolean).length;
 function saveBF(){try{localStorage.setItem('ff_bf',JSON.stringify(BF))}catch(e){}}
 function buildBF(b){solids.splice(0).forEach(o=>scene.remove(o));decor.splice(0).forEach(o=>scene.remove(o));const c=2.5,hx=b.w*c/2,hz=b.h*c/2,X=i=>(i+.5)*c-hx,Z=j=>(j+.5)*c-hz;LX=hx-1;LZ=hz-1;
@@ -374,7 +384,7 @@ for(const k in b.t){const[i,j]=k.split(',').map(Number),t=b.t[k],x=X(i),z=Z(j);i
 if(t==='wall')box(x,z,c,c,4,'conc');else if(t==='building')box(x,z,c,c,7,'brick');else if(t==='sand')box(x,z,c,1.2,1.3,'conc');else if(t==='crate')box(x,z,1.6,1.6,1.6,'crate');else if(t==='barrel')box(x,z,1,1,1.2,'barrel');
 else{const f=t==='fog',m=f?new THREE.Mesh(new THREE.BoxGeometry(c*1.3,3,c*1.3),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.3,depthWrite:false})):new THREE.Mesh(new THREE.PlaneGeometry(c,c),new THREE.MeshStandardMaterial({color:0x2d7bff,transparent:true,opacity:.75,roughness:.2}));if(f)m.position.set(x,1.5,z);else{m.rotation.x=-Math.PI/2;m.position.set(x,.03,z)}scene.add(m);decor.push(m)}}
 SP.B=[[X(b.ps[0]),Z(b.ps[1])]];SP.R=[[X(b.as[0]),Z(b.as[1])]];
-const[bg,sc,si,hi]=TOD[b.tod]||TOD.day;scene.background.set(bg);scene.fog=new THREE.Fog(bg,Math.max(4,25-b.fog*2.5),Math.max(25,130-b.fog*11));sun.color.set(sc);sun.intensity=si;scene.children.find(o=>o.isHemisphereLight).intensity=hi}
+const[bg,sc,si,hi]=TOD[b.tod]||TOD.day;scene.background.set(bg);scene.fog=new THREE.Fog(bg,25,Math.max(90,130-b.fog*4));sun.color.set(sc);sun.intensity=si;scene.children.find(o=>o.isHemisphereLight).intensity=hi}
 function layout(v){if(v>=BF.length)v=0;curMap=v;buildBF(BF[v])}
 function buildMap(){layout(cfg.map)}
 function zoneTick(dt){zt+=dt;zacc+=dt;const b=BF[curMap]||BF[0],f=Math.max(.3,1-zt/150*.7);ZX=b.w*1.25*f;ZZ=b.h*1.25*f;const c=zg.children;
@@ -477,7 +487,7 @@ $('ml').innerHTML=sl(0,cfg.lo[0])+sl(1,cfg.lo[1])+sl(2,cfg.lo[2]);const ks=Objec
 $('mw').innerHTML='<h2 style="grid-column:1/-1;margin:6px 0 0">SLOT 1 – PRIMARY</h2>'+ks.filter(k=>GUNS[k].s===1).map(cd).join('')+'<h2 style="grid-column:1/-1;margin:14px 0 0">SLOT 2 – SIDEARM &amp; SPECIAL</h2>'+ks.filter(k=>GUNS[k].s===2).map(cd).join('')+'<h2 style="grid-column:1/-1;margin:14px 0 0">SLOT 3 – MELEE</h2>'+ks.filter(k=>GUNS[k].s===3).map(cd).join('')};
 showPg('mm');}
 const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}},esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let USER=null,DB=null,UID='local',PNAME=LS('ff_name')||'',ADMIN=typeof claude==='undefined'&&location.hash==='#admin',BR={};try{BR=JSON.parse(LS('ff_br'))||{}}catch(e){}
+let USER=null,DB=null,UID='local',PNAME=LS('ff_name')||'',ADMIN=typeof claude==='undefined',BR={};try{BR=JSON.parse(LS('ff_br'))||{}}catch(e){}
 const TR={n:0},REC={on:false,t:0,acc:0,fr:[],ev:[]},RP={on:false,t:0,play:true,sp:1,fr:[],ev:[],g:[],ang:0,R:40};
 P.ms={sh:0,h:0,dd:0,dt:0};if(PNAME)P.name=PNAME;document.body.classList.toggle('adm',ADMIN);
 function recStart(){REC.on=true;REC.t=0;REC.acc=0;REC.fr=[];REC.ev=[]}
@@ -507,7 +517,7 @@ $('adb').innerHTML=bs.docs.map(d=>{const v=d.data();AB[d.id]=v;return `<div clas
 let AB={};
 {const M2=$('home').querySelector('main'),pg=document.createElement('div');pg.className='pg';pg.id='pgad';pg.style.display='none';pg.innerHTML='<h1>ADMIN</h1><p class="sub">Everyone who joined and every battle they played.</p><button class="cd" id="adr" style="--c:#3ec9ff;width:auto;display:inline-block">\u27f3 Refresh</button><h2>PLAYERS</h2><div id="adp"></div><h2>BATTLES</h2><div id="adb"></div>';M2.insertBefore(pg,$('go'));
 pg.onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.id==='adr')loadAdmin();if(b.dataset.rp)watch(b.dataset.rp);if(b.dataset.rpt){const v=AB[b.dataset.rpt],r=b.closest('.row2');if(r.nextSibling&&r.nextSibling.className==='rep2'){r.nextSibling.remove();return}r.insertAdjacentHTML('afterend','<div class="rep2">'+((v&&v.report)||[]).map(esc).join('<br>')+'</div>')}};
-const tl=document.createElement('div');tl.className='tune';tl.innerHTML='<label>\u26a1 Training speed (Agent vs Agent)<select id="tsp"><option value="1">1x</option><option value="4">4x</option><option value="10">10x</option></select></label><label><input type="checkbox" id="tau" style="width:auto"> Auto-train: rematch forever, loser copies the winner</label><label><button id="trs" style="width:auto;margin:0;border:2px solid #14142b;border-radius:10px;padding:6px 12px;background:#ffd23f">Reset learned brains</button></label>';$('mm').after(tl);
+const tl=document.createElement('div');tl.className='tune';tl.innerHTML='<label>\u26a1 Training speed (Agent vs Agent)<select id="tsp"><option value="1">1x</option><option value="2">2x</option><option value="5">5x</option><option value="10">10x</option><option value="20">20x</option><option value="99">MAX (uncapped)</option></select></label><label><input type="checkbox" id="tau" style="width:auto"> Auto-train: rematch forever, loser copies the winner</label><label><button id="trs" style="width:auto;margin:0;border:2px solid #14142b;border-radius:10px;padding:6px 12px;background:#ffd23f">Reset learned brains</button></label>';$('mm').after(tl);
 $('tsp').onchange=e=>cfg.speed=+e.target.value;$('trs').onclick=()=>{BR={};LS('ff_br','{}');TR.n=0}}
 const trn=document.createElement('div');trn.id='trn';trn.className='h';document.body.appendChild(trn);
 const rpb=document.createElement('div');rpb.id='rpb';rpb.innerHTML='<button id="rpp">\u23f8</button><input id="rps" type="range" min="0" max="1000" value="0"><select id="rpv"><option>1</option><option>2</option><option>4</option></select><span id="rpt2"></span><button id="rpx">\u2715 Close</button><div id="rpe"></div>';document.body.appendChild(rpb);
@@ -597,7 +607,7 @@ return { mv, st:str, turn, fire, ads, sprint, reload, say };`}
 function initAgent(b,a){b.gk=a[4];b.gun=GUNS[b.gk];b.am=b.gun.m;b.reloading=0;b.pm={};b.mem=null;b.lock=0;b.win={sh:0,h:0,dd:0,dt:0};const sv=BR[b.name];b.G=Object.assign({},G0,PRE[b.name]||{},(sv&&sv.G)||{});b.gen=(sv&&sv.gen)||1;b.manual=false;clampG(b.G);setCode(b,genCode(b))}
 function deployAgents(){PP={};FS={tk:null,dl:null};SHOTS=[];const L=cfg.ag.slice();if(cfg.mode==='ava'&&L.length<2)L.push(AGS[(AGS.findIndex(x=>x[0]===L[0])+1)%AGS.length][0]);cfg.goal=cfg.mode==='ava'?Math.max(1,L.length-1):L.length;
 L.forEach((n,i)=>{const a=AGS.find(x=>x[0]===n),b=addBot(n,cfg.mode==='ava'&&i%2?'B':'R',DEF,null);initAgent(b,a);b.x+=(i-(L.length-1)/2)*1.6;b.g.position.set(b.x,0,b.z)})}
-function approach(o,d,u,maxD){const fy=u===P?(P.fy||0):0;let best={dist:9,y:0,p:o};for(let i=0;i<=8;i++){const y=fy+.1+i*.2,S=new THREE.Vector3(u.x,y,u.z),t=cl(d.dot(S.clone().sub(o)),0,maxD),p=o.clone().addScaledVector(d,t),dd=p.distanceTo(S);if(dd<best.dist)best={dist:dd,y:y-fy,p}}return best}
+function approach(o,d,u,maxD){const fy=(u.fy||0);let best={dist:9,y:0,p:o};for(let i=0;i<=8;i++){const y=fy+.1+i*.2,S=new THREE.Vector3(u.x,y,u.z),t=cl(d.dot(S.clone().sub(o)),0,maxD),p=o.clone().addScaledVector(d,t),dd=p.distanceTo(S);if(dd<best.dist)best={dist:dd,y:y-fy,p}}return best}
 function fireRay(o,dir,w,src,kn){ray.set(o,dir);ray.far=200;const hs=ray.intersectObjects(solids)[0],gh=ray.intersectObject(gr)[0];let maxD=200,hit=hs;if(hs)maxD=hs.distance;if(gh&&gh.distance<maxD){maxD=gh.distance;hit=gh}
 const end=o.clone().addScaledVector(dir,maxD);tracer(o.clone().addScaledVector(dir,.6),end);SHOTS.push({x:src.x,z:src.z,t:clock,team:src.t,src});if(SHOTS.length>40)SHOTS.shift();
 const t=dm(kn);let any=false;
@@ -611,22 +621,22 @@ ammo[k]--;P.ms.sh++;next=clock+60/w.r;kick=.05;P.pitch+=w.rc*.6;P.yaw+=rnd(-.5,.
 const o=cam.position.clone(),sp=w.sp*(1-.75*adsT)*(P.mv?1.8:1);for(let i=0;i<(w.p||1);i++)fireRay(o,new THREE.Vector3(rnd(-sp,sp),rnd(-sp,sp),-1).applyQuaternion(cam.quaternion).normalize(),w,P,k)}
 function sense(b){const bf=BF[curMap]||BF[0],VR=[60,45,30][['day','dusk','night'].indexOf(bf.tod)]*(1-bf.fog*.04),gun=b.gun;let best=null;
 for(const e of units()){if(e===b||e.hp<=0||e.t===b.t||(e===P&&selfPlay))continue;const dx=e.x-b.x,dz=e.z-b.z,d=Math.hypot(dx,dz);if(d>VR)continue;let r=Math.atan2(-dx,-dz)-b.yaw;r=Math.atan2(Math.sin(r),Math.cos(r));if(Math.abs(r)>1||!los(b,e))continue;if(!best||d<best.d)best={e,d,rel:r}}
-let seen=false;if(best){b.spot=(b.spot||0)+.2;seen=b.spot>=b.G.react+best.d*.004}else b.spot=0;
+let seen=false;if(best){b.spot=(b.spot||0)+.1;seen=b.spot>=b.G.react+best.d*.004}else b.spot=0;
 if(seen){b.tg=best.e;b.mem={x:best.e.x,z:best.e.z,t:clock}}else b.tg=null;
 let heard=false;for(const sh of SHOTS){if(clock-sh.t<1.2&&sh.team!==b.t&&!(sh.src===P&&selfPlay)&&Math.hypot(sh.x-b.x,sh.z-b.z)<35){heard=true;if(!seen&&(!b.mem||sh.t>b.mem.t))b.mem={x:sh.x+rnd(-5,5),z:sh.z+rnd(-5,5),t:sh.t}}}
 const mm=b.mem,rel=(x,z)=>{const r=Math.atan2(-(x-b.x),-(z-b.z))-b.yaw;return Math.atan2(Math.sin(r),Math.cos(r))},wh=a=>{ray.set(new THREE.Vector3(b.x,1,b.z),new THREE.Vector3(-Math.sin(b.yaw+a),0,-Math.cos(b.yaw+a)));ray.far=6;const h=ray.intersectObjects(solids)[0];return h?h.distance:6};
-b.s={seen,bearing:seen?best.rel:mm?rel(mm.x,mm.z):0,rng:seen?best.d:-1,hasMem:!!mm,memAge:mm?clock-mm.t:99,heard,hp:Math.round(b.hp),am:b.am,mag:gun.m,reloading:!!b.reloading,eGun:seen?(best.e===P?GUNS[lo[cur]].k:best.e.gun.k):'',gun:gun.k,wallF:wh(0),wallL:wh(.9),wallR:wh(-.9),zone:Math.min(ZX-Math.abs(b.x),ZZ-Math.abs(b.z)),cb:rel(0,0),time:+clock.toFixed(1)}}
+b.s={seen,bearing:seen?best.rel:mm?rel(mm.x,mm.z):0,rng:seen?best.d:-1,hasMem:!!mm,memAge:mm?clock-mm.t:99,heard,hp:Math.round(b.hp),am:b.am,mag:gun.m,reloading:!!b.reloading,eGun:seen?(best.e===P?GUNS[lo[cur]].k:(best.e.gun?best.e.gun.k:'rifle')):'',gun:gun.k,wallF:wh(0),wallL:wh(.9),wallR:wh(-.9),zone:Math.min(ZX-Math.abs(b.x),ZZ-Math.abs(b.z)),cb:rel(0,0),time:+clock.toFixed(1)}}
 function bTick(b,dt){bFx(b,dt);if(b.slow>0){b.slow-=dt;dt*=.5}
-if(b.hp<=0){if((b.rt-=dt)<=0){b.hp=100;spawn(b);b.g.visible=true;b.am=b.gun.m;b.mem=null;b.reloading=0}return}
+if(b.hp<=0){if((b.rt-=dt)<=0){b.hp=MAXHP;spawn(b);b.g.visible=true;b.am=b.gun.m;b.mem=null;b.reloading=0}return}
 const G=b.G,gun=b.gun;b.cd-=dt;b.tk-=dt;if(b.reloading&&(b.rlT-=dt)<=0){b.reloading=0;b.am=gun.m}
-if(b.tk<=0){b.tk=.2;sense(b);let o;try{o=b.fn(b.s,b.pm)||{}}catch(e){o={say:'ERROR: '+e.message}}b.act=o;if(o.say&&o.say!==b.last){b.last=o.say;b.hist.unshift(o.say);b.hist.length=Math.min(b.hist.length,6)}if(o.reload&&!b.reloading&&b.am<gun.m){b.reloading=1;b.rlT=gun.rl}}
-const a=b.act,seen=b.s&&b.s.seen&&b.tg&&b.tg.hp>0;b.yaw+=cl(+a.turn||0,-1,1)*5*dt;
+if(b.tk<=0){b.tk=.1;sense(b);let o;try{o=b.fn(b.s,b.pm)||{}}catch(e){o={say:'ERROR: '+e.message}}b.act=o;if(o.say&&o.say!==b.last){b.last=o.say;b.hist.unshift(o.say);b.hist.length=Math.min(b.hist.length,6)}if(o.reload&&!b.reloading&&b.am<gun.m){b.reloading=1;b.rlT=gun.rl}}
+const a=b.act,seen=b.s&&b.s.seen&&b.tg&&b.tg.hp>0;let fresh=0;if(seen){const r=Math.atan2(-(b.tg.x-b.x),-(b.tg.z-b.z))-b.yaw;fresh=Math.atan2(Math.sin(r),Math.cos(r))}b.yaw+=cl(seen?G.kp*fresh:(+a.turn||0),-1,1)*4.5*dt;
 if(seen)b.lock=Math.min(1,(b.lock||0)+(Math.abs(b.s.bearing)<.15?dt*G.lockRate:0));else b.lock=Math.max(0,(b.lock||0)-dt*2);
 let mv=cl(+a.mv||0,-1,1),st=cl(+a.st||0,-1,1);if(b.stk>.5){b.esc=1.2;b.ed=Math.random()<.5?-1:1;b.stk=0}if(b.esc>0){b.esc-=dt;mv=-.3;st=b.ed}
 const sp=(a.sprint&&!a.fire?6.5:4.2)*(a.ads?.6:1),sn=Math.sin(b.yaw),cs=Math.cos(b.yaw),ox=b.x,oz=b.z;
 b.x+=(-sn*mv+cs*st)*sp*dt;b.z+=(-cs*mv-sn*st)*sp*dt;push(b,.5);b.x=cl(b.x,-LX,LX);b.z=cl(b.z,-LZ,LZ);b.stk=Math.hypot(b.x-ox,b.z-oz)<sp*dt*Math.hypot(mv,st)*.3&&Math.hypot(mv,st)>.2?b.stk+dt:0;
-if(a.fire&&seen&&!b.reloading&&b.cd<=0){if(b.am<=0){b.reloading=1;b.rlT=gun.rl}else{b.am--;b.cd=60/gun.r;if(b.ms)b.ms.sh++;
-const e=b.tg,dd=Math.hypot(e.x-b.x,e.z-b.z),pit=Math.atan2(1+G.headBias*.65-1.5,dd),sg=gun.sp+G.jitter*(1-.8*(b.lock||0))+(Math.hypot(mv,st)>.1?.006:0),py=b.yaw+rnd(-sg,sg),pp=pit+rnd(-sg,sg),
+if(a.fire&&seen&&!b.reloading&&b.cd<=0&&Math.abs(fresh)<Math.max(.012,Math.atan2(.28,Math.max(Math.hypot(b.tg.x-b.x,b.tg.z-b.z),2)))*G.aimTol*1.3){if(b.am<=0){b.reloading=1;b.rlT=gun.rl}else{b.am--;b.cd=60/gun.r;if(b.ms)b.ms.sh++;
+const e=b.tg,dd=Math.hypot(e.x-b.x,e.z-b.z),pit=Math.atan2(1+G.headBias*.65+(e.fy||0)-1.5,dd),sg=gun.sp+G.jitter*(1-.8*(b.lock||0))+(Math.hypot(mv,st)>.1?.006:0),py=b.yaw+rnd(-sg,sg),pp=pit+rnd(-sg,sg),
 o2=new THREE.Vector3(b.x-Math.sin(b.yaw)*.5,1.45,b.z-Math.cos(b.yaw)*.5),fw=new THREE.Vector3(-Math.sin(py)*Math.cos(pp),Math.sin(pp),-Math.cos(py)*Math.cos(pp));
 sfx(.1,.4/(1+dd/6),gun.d>50?700:1700);for(let i=0;i<(gun.p||1);i++)fireRay(o2,fw.clone().add(new THREE.Vector3(rnd(-1,1),rnd(-1,1),rnd(-1,1)).multiplyScalar(gun.p?gun.sp*.7:0)).normalize(),gun,b,b.gk)}}
 if(b.am<=0&&!b.reloading){b.reloading=1;b.rlT=gun.rl}
@@ -636,7 +646,7 @@ function adapt(b){const m=b.ms,w=b.win,g=b.G,sh=m.sh-w.sh,h=m.h-w.h,dd=m.dd-w.dd
 if(sh>3){const a=h/sh;if(a<.3){g.jitter*=.88;g.burstPause+=.5;L.push(`only ${pc(a)} of shots landed: steadier aim, longer pauses`)}else if(a>.6){g.burstLen+=.5;g.rangeKeep+=1;L.push(`${pc(a)} accuracy: longer bursts from a bit further away`)}}
 if(dt>dd*1.5&&dt>20){g.coverSeek+=.08;g.strafeAmp+=.05;L.push('took more damage than it dealt: using walls and strafing more')}else if(dd>dt*1.5&&dd>20){g.closeIn+=.05;L.push('winning the trades: pushing a little harder')}
 if(sh<2&&b.s&&!b.s.seen){g.flankBias=cl(g.flankBias+(Math.random()<.5?-.3:.3),-1,1);g.sprintSearch+=.1;L.push('no contact: trying a different search route')}
-clampG(g);b.gen++;L.forEach(t=>b.hist.unshift('LEARN: '+t));b.hist.length=Math.min(b.hist.length,6);b.win={sh:m.sh,h:m.h,dd:m.dd,dt:m.dt};if(!b.manual)setCode(b,genCode(b));if(sel===b&&document.activeElement!==$('code'))$('code').value=b.code}
+clampG(g);b.gen++;L.forEach(t=>{b.hist.unshift('LEARN: '+t);blog(b,t)});b.hist.length=Math.min(b.hist.length,6);b.win={sh:m.sh,h:m.h,dd:m.dd,dt:m.dt};if(!b.manual)setCode(b,genCode(b));if(sel===b&&document.activeElement!==$('code'))$('code').value=b.code}
 function learnAfter(w){const why=[],wm=w.ms,wa=ac(wm);
 why.push(w!==P?`${w.name} won. Accuracy ${pc(wa)}, damage dealt ${Math.round(wm.dd)} vs taken ${Math.round(wm.dt)}, head hits ${wm.hd||0}.`:`You won. Accuracy ${pc(wa)}, head hits ${wm.hd||0}. The agents are studying how you did it.`);
 for(const l of bots){if(l===w)continue;const g=l.G,lm=l.ms,la=ac(lm),t=[];
@@ -646,7 +656,7 @@ if((wm.hd||0)>(lm.hd||0)){g.headBias+=.12;t.push('the winner got more headshots:
 if(lm.dt>lm.dd&&wm.dt<wm.dd){g.coverSeek+=.1;g.retreatHp+=4;t.push('the winner took less damage than it dealt: using cover and retreating earlier')}
 if(w.G&&w.G.rangeKeep>g.rangeKeep+3){g.rangeKeep+=2;t.push('the winner fought from longer range: stretching preferred range')}
 clampG(g);l.gen++;if(t.length)why.push(l.name+' learned: '+t.join('; ')+'.')}
-bots.forEach(b=>{BR[b.name]={G:b.G,gen:b.gen};if(!b.manual)setCode(b,genCode(b))});return why}
+bots.forEach(b=>{if(b.ghost)return;const e=BR[b.name]=BR[b.name]||{};e.G=b.G;e.gen=b.gen;e.hot=b.hot;e.m=(e.m||0)+1;if(b===w)e.w=(e.w||0)+1;why.filter(x=>x.startsWith(b.name)).forEach(x=>blog(b,x));if(!b.manual)setCode(b,genCode(b))});return why}
 function report(b,won){const m=b.ms,a=ac(m),g=b.G,L=[`Weapon: ${b.gun.n}. Fired ${m.sh}, hit ${m.h} (${pc(a)}), head hits ${m.hd||0}. Damage dealt ${Math.round(m.dd)}, taken ${Math.round(m.dt)}.`];
 if(m.sh<5)L.push('It almost never fired: it could not find you. It should patrol wider and react to gunshots faster.');else if(a<.35)L.push('Accuracy is low: slow the bursts, hold still while firing, and aim higher.');
 if(m.dt>m.dd*1.2)L.push(`It took more damage than it dealt: it should use walls and keep a better range for the ${b.gun.n}.`);
@@ -682,5 +692,277 @@ function askName(){if(ADMIN&&!SIM){if(!PNAME){PNAME='Admin';LS('ff_name',PNAME)}
 const d=document.createElement('div');d.id='nmo';d.innerHTML='<div class="bx2"><h1>Welcome, soldier!</h1><p>'+(USER?'Signed in with your claude.ai account.':'Playing as a guest.')+' Enter your name and email. The email is not verified, it only lets the admin identify you.</p><input id="nmi" maxlength="16" placeholder="Player name" value="'+esc(PNAME)+'"><input id="nme" type="email" placeholder="you@example.com"><button id="nmb">ENTER THE ARENA</button><p id="nmx" style="color:#c00;margin:6px 0 0"></p></div>';document.body.appendChild(d);
 $('nmb').onclick=()=>{const v=$('nmi').value.trim(),em=$('nme').value.trim();if(!v||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){$('nmx').textContent='Enter a name and a valid email.';return}PNAME=v.slice(0,16);P.name=PNAME;LS('ff_name',PNAME);LS('ff_email',em);d.remove();wh();pReg()}}
 addEventListener('keydown',e=>{if(e.code==='Escape'){if(!home&&!RP.on&&!ended){REC.on=false;fire=0;adsM=0;$('menu').click()}else if(ended&&!home)$('nb').click()}});
-buildMap();fillLo();hr();requestAnimationFrame(loop);
+// ===== v3: smarter agents, duels, spectator, replay training, admin tools, touch controls =====
+Object.assign(GENES,{aimTol:[.5,2.5,'fire tolerance, x the body angle'],retreatHp:[0,100,'retreat health'],stopToShoot:[0,1,'stand still while firing'],hotPull:[0,1,'search where enemies were seen before']});
+Object.assign(G0,{aimTol:1.2,retreatHp:50,jitter:.012,stopToShoot:.5,hotPull:.6});Object.assign(PRE.Reaper,{retreatHp:20,aimTol:1.5});PRE.Bastion.retreatHp=70;
+const MAXHP=200,OWNER='hans1030310@gmail.com',GT={on:false,att:0},hk=(x,z)=>Math.floor(x/4)+','+Math.floor(z/4),mailto=(to,s,b)=>'mailto:'+to+'?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent(b);
+let DU=null,LASTREC=null,MOB=('ontouchstart' in window)||navigator.maxTouchPoints>0,tcFire=false;
+if(window.__SEED){const s=window.__SEED;try{if(s.BR&&!Object.keys(BR).length)BR=s.BR;if(s.GD&&!Object.keys(GD).length){GD=s.GD;GR=s.GR||1}if(s.BF&&s.BF.length&&!LS('ff_bf'))BF=s.BF}catch(e){}}
+function blog(b,x){const e=BR[b.name]=BR[b.name]||{};e.G=b.G;e.gen=b.gen;(e.log=e.log||[]).push({t:Date.now(),g:b.gen,x});if(e.log.length>60)e.log.shift();LS('ff_br',JSON.stringify(BR))}
+function hotAdd(b,e){b.hot=b.hot||{};const k=hk(e.x,e.z);b.hot[k]=Math.min(30,(b.hot[k]||0)+1)}
+function hotDecay(b){if(!b.hot)return;const k=hk(b.x,b.z);if(b.hot[k])b.hot[k]=Math.max(0,b.hot[k]-.15)}
+function hotInfo(b){const h=b.hot||{};let bk=null,bv=0;for(const k in h){const[cx,cz]=k.split(',').map(Number),x=cx*4+2,z=cz*4+2;if(Math.hypot(x-b.x,z-b.z)<6)continue;if(h[k]>bv){bv=h[k];bk=[x,z]}}if(!bk||bv<1)return{hasHot:false,hb:0};const r=Math.atan2(-(bk[0]-b.x),-(bk[1]-b.z))-b.yaw;return{hasHot:true,hb:Math.atan2(Math.sin(r),Math.cos(r))}}
+const sense0=sense;sense=function(b){sense0(b);Object.assign(b.s,hotInfo(b));if(b.tg)hotAdd(b,b.tg);else hotDecay(b)};
+const bt0=bTick;bTick=function(b,dt){if(b.ghost){ghostTick(b,dt);return}bt0(b,dt)};
+const fr0=fireRay;fireRay=function(o,d,w,src,kn){if(src===P&&REC.on&&!GT.on&&REC.sh&&REC.sh.length<400)REC.sh.push([+REC.t.toFixed(2),+P.x.toFixed(1),+P.z.toFixed(1),+(P.fy||0).toFixed(1),+d.x.toFixed(3),+d.y.toFixed(3),+d.z.toFixed(3),kn]);return fr0(o,d,w,src,kn)};
+function recStart(){REC.on=true;REC.t=0;REC.acc=0;REC.fr=[];REC.ev=[];REC.sh=[]}
+function genCode(b){const g=b.G,f=v=>(+v).toFixed(3),cf=Object.entries(GENES).map(([k,[a,z,d]])=>`const ${k} = ${f(g[k])}; // ${d} (${a} to ${z})`).join('\n');
+return `// ===== ${b.name} | generation ${b.gen} | weapon ${b.gun.n} =====
+// Written automatically from what this agent has learned. It only uses what it can see or hear.
+${cf}
+const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+const m = p;  // private memory that survives between decisions (10 decisions per second)
+m.burst = m.burst||0; m.pause = m.pause||0; m.dir = m.dir||1; m.flip = m.flip||0;
+const sniperFoe = s.seen && s.eGun==='sniper';
+let state='PATROL', mv=0, str=0, turn=0, fire=false, ads=false, sprint=false, reload=false, say='';
+// ---- 1. choose a state from what I sense ----
+if (s.seen && s.hp<retreatHp) state='RETREAT';
+else if (s.seen) state='ENGAGE';
+else if (s.hasMem && s.memAge<memoryTime) state='SEARCH';
+// ---- 2. act ----
+if (state==='ENGAGE' || state==='RETREAT') {
+  if (m.lastB===undefined) m.lastB = s.bearing;
+  const rate = (s.bearing-m.lastB)/0.1;   // how fast the enemy slides across my view
+  m.lastB = s.bearing;
+  turn = clamp(kp*s.bearing + lead*rate, -1, 1);
+  const want = rangeKeep * (sniperFoe ? (1-0.5*sniperRespect) : 1);
+  if (s.rng > want+tol) mv = closeIn; else if (s.rng < want-tol) mv = -backoff;
+  if (state==='RETREAT') mv = -1;
+  m.flip -= 0.1;
+  if (m.flip<=0) { m.dir = -m.dir; m.flip = flipTime*(0.5+Math.random()); }
+  str = m.dir * strafeAmp * (sniperFoe ? 1+sniperRespect : 1);
+  if (coverSeek>0.5 && (s.wallL<2.0 || s.wallR<2.0)) str = (s.wallL<s.wallR ? -1 : 1) * 0.3 * coverSeek;
+  if (s.reloading) { mv = -1; str = m.dir*0.8; }
+  if (sniperFoe && s.rng>want+tol) sprint = true;
+  ads = s.gun==='sniper' && s.rng>adsRange;
+  const tolA = Math.max(0.012, Math.atan2(0.28, Math.max(s.rng,2)) * aimTol);   // how close the crosshair must be
+  if (m.pause>0) { m.pause--; }
+  else if (Math.abs(s.bearing) < tolA && !s.reloading) { fire=true; m.burst++; if (m.burst>=Math.round(burstLen*2)) { m.burst=0; m.pause=Math.round(burstPause*2); } }
+  if (fire) { str *= (1-stopToShoot); mv *= (1-0.5*stopToShoot); }
+  say = state==='RETREAT' ? 'Hurt. Backing off and keeping the enemy in view.' : 'Enemy in sight ('+Math.round(s.rng)+' m). '+(fire?'Firing. ':'Lining up the shot. ')+(mv>0?'Closing in':mv<0?'Backing off':'Holding range')+(sniperFoe?' (sniper: moving fast, using walls)':'')+'.';
+} else if (state==='SEARCH') {
+  m.lastB = undefined;
+  turn = clamp(kp*s.bearing,-1,1);
+  mv = Math.abs(s.bearing)<0.8 ? 1 : 0.2;
+  sprint = sprintSearch>0.5;
+  str = flankBias*0.4;
+  say = (s.heard?'Heard shots. ':'Lost sight. ')+'Heading to where the enemy was last seen '+s.memAge.toFixed(0)+' s ago.';
+} else {
+  m.lastB = undefined;
+  const scan = scanSpeed*Math.sin(s.time*0.9);
+  if (s.hasHot && hotPull>0.05) { turn = hotPull*clamp(kp*s.hb,-1,1) + (1-hotPull)*scan; say = 'No contact. Checking a spot where enemies were seen before.'; }
+  else { turn = scan + 0.4*clamp(s.cb,-1,1); say = 'No contact. Scanning and patrolling.'; }
+  mv = patrolSpeed;
+  str = flankBias*0.3;
+}
+// ---- 3. stay safe ----
+if (s.wallF<1.4) { turn += (s.wallL>s.wallR ? 0.9 : -0.9); mv = Math.min(mv,0.2); say += ' (turning away from a wall)'; }
+if (s.zone<zoneMargin) { turn = clamp(kp*s.cb,-1,1); mv = 1; say = 'The arena is shrinking: moving to the centre.'; }
+if (s.am<=0 || (!s.seen && s.am < s.mag*reloadAt)) reload = true;
+return { mv, st:str, turn, fire, ads, sprint, reload, say };`}
+function initAgent(b,a){b.gk=a[4];b.gun=GUNS[b.gk];b.am=b.gun.m;b.reloading=0;b.pm={};b.mem=null;b.lock=0;b.win={sh:0,h:0,dd:0,dt:0};const sv=BR[b.name];b.G=Object.assign({},G0,PRE[b.name]||{},(sv&&sv.G)||{});b.gen=(sv&&sv.gen)||1;b.hot=Object.assign({},(sv&&sv.hot)||{});b.manual=false;clampG(b.G);setCode(b,genCode(b))}
+function deployAgents(){GT.on=false;PP={};FS={tk:null,dl:null};SHOTS=[];if(!ADMIN){$('tau').checked=false;cfg.speed=1;if(cfg.mode==='ava')cfg.mode='pva'}
+const L=cfg.ag.slice();if(cfg.mode==='ava'&&L.length<2)L.push(AGS[(AGS.findIndex(x=>x[0]===L[0])+1)%AGS.length][0]);cfg.goal=cfg.mode==='ava'?Math.max(1,L.length-1):L.length;
+L.forEach((n,i)=>{const a=AGS.find(x=>x[0]===n),b=addBot(n,cfg.mode==='ava'&&i%2?'B':'R',DEF,null);initAgent(b,a);b.x+=(i-(L.length-1)/2)*1.6;b.g.position.set(b.x,0,b.z)})}
+function getG(n){const b=bots.find(x=>x.name===n);if(b)return b.G;const e=BR[n]=BR[n]||{};e.G=Object.assign({},G0,PRE[n]||{},e.G||{});e.gen=e.gen||1;return e.G}
+function saveG(n,g,txt){const b=bots.find(x=>x.name===n);if(b){b.gen++;blog(b,'Admin told it: '+txt);if(!b.manual)setCode(b,genCode(b))}else{const e=BR[n];e.gen++;(e.log=e.log||[]).push({t:Date.now(),g:e.gen,x:'Admin told it: '+txt});LS('ff_br',JSON.stringify(BR))}}
+function talk(txt,name){const t=txt.toLowerCase(),out=[];for(const n of(name==='all'?AGS.map(a=>a[0]):[name])){const g=getG(n),ch=[],up=(k,d)=>{g[k]+=d;ch.push(k+(d>0?' +':' ')+d)};
+if(/aggress|attack|push|rush/.test(t)){up('closeIn',.15);up('rangeKeep',-5);up('retreatHp',-10)}if(/defen|careful|safe|cover/.test(t)){up('coverSeek',.2);up('retreatHp',15)}
+if(/aim|accura|shoot better|miss/.test(t)){up('jitter',-.004);up('aimTol',-.2);up('stopToShoot',.15);up('lockRate',.3)}if(/head/.test(t))up('headBias',.2);if(/body|chest/.test(t))up('headBias',-.2);
+if(/far|long range|distance|snip/.test(t))up('rangeKeep',6);if(/close|near|short range/.test(t))up('rangeKeep',-6);if(/strafe more|dodge/.test(t))up('strafeAmp',.15);if(/strafe less|stand still/.test(t))up('strafeAmp',-.15);
+if(/flank left/.test(t)){g.flankBias=-1;ch.push('flank left')}if(/flank right/.test(t)){g.flankBias=1;ch.push('flank right')}if(/react|faster|quick/.test(t))up('react',-.05);if(/hunt|search|find/.test(t))up('hotPull',.2);
+if(ch.length){clampG(g);saveG(n,g,txt);out.push(n+': understood. Changed '+ch.join(', ')+'. My code was rewritten.')}
+else if(/why|report|status|how|learn/.test(t)){const e=BR[n]||{};out.push(n+': generation '+(e.gen||1)+'. '+((e.log&&e.log.length)?'Last lesson: '+e.log[e.log.length-1].x:'No lessons yet.'))}
+else out.push(n+': I did not understand. Try: be more aggressive, aim at the head, stay at long range, use more cover, flank left, react faster, why did you lose?')}return out}
+function ghostTick(b,dt){b.gt+=dt;const fr=b.fr;let i=0;while(i<fr.length-2&&fr[i+1][0]<=b.gt)i++;const a=fr[i],c=fr[Math.min(i+1,fr.length-1)],k=c[0]>a[0]?cl((b.gt-a[0])/(c[0]-a[0]),0,1):0;
+if(b.hp>0){b.x=(a[1]+(c[1]-a[1])*k)/10;b.z=(a[2]+(c[2]-a[2])*k)/10;b.yaw=a[3]/20;b.g.position.set(b.x,0,b.z);b.g.rotation.y=b.yaw}
+while(b.si<b.sh.length&&b.sh[b.si][0]<=b.gt){const s=b.sh[b.si++],g=GUNS[s[7]];if(b.hp>0&&g)fr0(new THREE.Vector3(b.x,1.6+s[3],b.z),new THREE.Vector3(s[4],s[5],s[6]).normalize(),g,b,s[7])}}
+function startGhostTrain(r,name){if(!r||!r.fr||!r.fr.length){$('tkl').innerHTML+='<div>Play a Player vs Agent match first.</div>';return}
+GT.on=true;GT.att=0;GT.best=null;GT.end=r.fr[r.fr.length-1][0];cfg.mode='ava';cfg.speed=10;selfPlay=true;ended=false;home=false;RP.on=false;$('home').style.display='none';bots.splice(0).forEach(b=>scene.remove(b.g));buildBF(r.bf);ZX=ZZ=99;
+const a=AGS.find(x=>x[0]===name)||AGS[0],ag=addBot(a[0],'R',DEF,null);initAgent(ag,a);sel=ag;GT.ag=ag;const grp=makeBot('B');scene.add(grp);
+const gh={name:'You (ghost)',t:'B',x:0,z:0,yaw:0,hp:MAXHP,kills:0,deaths:0,g:grp,ghost:1,fr:r.fr,sh:(r.sh||[]).slice(),si:0,gt:0,rt:0};grp.traverse(o=>o.userData.b=gh);bots.push(gh);GT.gh=gh;gtReset();$('trn').textContent='REPLAY TRAINING \u00b7 '+ag.name+' \u00b7 attempt 1'}
+function gtReset(){const ag=GT.ag,gh=GT.gh;spawn(ag);ag.hp=MAXHP;ag.am=ag.gun.m;ag.reloading=0;ag.mem=null;ag.pm={};ag.ms={sh:0,h:0,dd:0,dt:0};ag.g.visible=true;ag.rt=0;ag.kills=0;gh.hp=MAXHP;gh.gt=0;gh.si=0;gh.g.visible=true;gh.kills=0;SHOTS=[];P.x=0;P.z=0}
+function gtCheck(){const ag=GT.ag,gh=GT.gh;if(gh.hp<=0||ag.hp<=0||gh.gt>GT.end+6)gtEnd(gh.hp<=0)}
+function gtEnd(ok){GT.att++;const ag=GT.ag,m=ag.ms;if(ok){blog(ag,'Beat the replay of '+(PNAME||'the player')+' after '+GT.att+' attempts');GT.on=false;ended=true;BR[ag.name].hot=ag.hot;$('trn').textContent='\u2705 '+ag.name+' beat your replay after '+GT.att+' attempts (generation '+ag.gen+')';return}
+ const sc=m.dd+m.h*5+(m.sh>0?20:0)-(ag.hp<=0?40:0);if(!GT.best||sc>GT.best.sc)GT.best={sc,G:Object.assign({},ag.G)};else ag.G=Object.assign({},GT.best.G);
+const g=ag.G,acc=m.sh?m.h/m.sh:0,why=m.sh===0?'it never fired':acc<.3?'it missed too much':'not enough damage',pool=m.sh===0?['react','sprintSearch','hotPull','flankBias','scanSpeed','patrolSpeed']:acc<.3?['jitter','aimTol','lockRate','stopToShoot','burstLen','burstPause','kp','lead']:['closeIn','rangeKeep','strafeAmp','headBias','coverSeek','retreatHp'],ks=[];
+while(ks.length<3){const k=pool[Math.random()*pool.length|0];if(!ks.includes(k))ks.push(k)}ks.forEach(k=>{g[k]+=rnd(-.15,.15)*(GENES[k][1]-GENES[k][0])});clampG(g);ag.gen++;blog(ag,'replay attempt '+GT.att+' failed ('+why+', score '+(sc|0)+'): trying new '+ks.join(', '));if(!ag.manual)setCode(ag,genCode(ag));
+if(GT.att>=300){GT.on=false;ended=true;$('trn').textContent='Stopped after 300 attempts. Best score '+(GT.best.sc|0);return}$('trn').textContent='REPLAY TRAINING \u00b7 '+ag.name+' \u00b7 attempt '+(GT.att+1)+' \u00b7 best score '+(GT.best.sc|0);gtReset()}
+function chk(){if(GT.on){gtCheck();return}const w=units().find(u=>u.kills>=cfg.goal);if(w)endMatch(w)}
+async function saveBattle(w,dur){const n=(+LS('ff_pb')||0)+1;LS('ff_pb',n);pReg();if(!DB)return;const ava=cfg.mode==='ava',b=BF[curMap]||BF[0],id='b'+Date.now().toString(36);
+try{const ref=DB.doc('battles/'+UID),s=await ref.get(),items=(s.exists&&s.data().items)||[];items.unshift({id,win:ava||w===P,ag:bots.map(x=>x.name).join(' vs '),map:b.name,dur:Math.round(dur),ts:Date.now(),report:bots.map(x=>x.name+': '+x.rep.join(' '))});
+await DB.doc('battles/'+UID+'/rp/'+id).set({rp:{bf:b,fr:REC.fr,ev:REC.ev,sh:(REC.sh||[]).slice(0,300),names:units().map(u=>u.name),teams:units().map(u=>u.t)}});await ref.set({pn:PNAME||'Guest',items:items.slice(0,15)})}catch(e){}}
+const em0=endMatch;endMatch=function(w){em0(w);LASTREC={bf:BF[curMap]||BF[0],fr:REC.fr,sh:REC.sh||[],ev:REC.ev,names:units().map(u=>u.name),teams:units().map(u=>u.t)};if(DU)duelSubmit(w===P?REC.t:999)};
+const specEl=document.createElement('div');specEl.id='spec';specEl.className='h';document.body.appendChild(specEl);
+const SPEC=()=>{const v=cfg.mode==='ava'&&!home&&!RP.on;if(!v&&specEl.textContent)specEl.textContent='';return v};
+function specCam(){const live=bots.filter(b=>b.hp>0&&!b.ghost),a=(sel&&sel.hp>0&&!sel.ghost)?sel:live[0];bots.forEach(b=>{if(b.hp>0)b.g.visible=b!==a});if(!a)return;cam.position.set(a.x,1.6,a.z);cam.rotation.set(0,a.yaw,0);vm.visible=false;$('scope').style.display='none';cam.fov=75;cam.updateProjectionMatrix();specEl.textContent='\ud83d\udc41 Spectating '+a.name+' ('+a.gun.n+', hp '+Math.max(0,a.hp|0)+')  \u00b7  \u25c0 \u25b6 or Q E to switch'+'  \u00b7  speed '+(cfg.speed===99?'MAX':cfg.speed+'x')+'  \u00b7  sim time '+REC.t.toFixed(0)+' s'}
+function specNext(d){const L=bots.filter(b=>!b.ghost);if(!L.length)return;sel=L[(L.indexOf(sel)+d+L.length)%L.length];refresh()}
+addEventListener('keydown',e=>{if(!SPEC()||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;if(e.code==='ArrowLeft'||e.code==='KeyQ')specNext(-1);if(e.code==='ArrowRight'||e.code==='KeyE')specNext(1)});
+$('menu').addEventListener('click',()=>{GT.on=false;DU=null});
+const panel0=panel;panel=function(){if(ADMIN)panel0()};
+function chkAdmin(){if((LS('ff_email')||'').toLowerCase()===OWNER&&!SIM)ADMIN=true;return ADMIN}
+function adminUI(){document.body.classList.toggle('adm',ADMIN);const nv=document.querySelector('#home nav');if(ADMIN&&!nv.querySelector('[data-n=ad]'))nv.insertAdjacentHTML('beforeend','<button data-n="ad">Admin</button>');const b=nv.querySelector('[data-n=ad]');if(b)b.style.display=ADMIN?'':'none';wh()}
+function askName(){if(!window.__ready){setTimeout(askName,0);return}chkAdmin();adminUI();if(ADMIN&&!SIM){if(!PNAME){PNAME='Admin';LS('ff_name',PNAME)}P.name=PNAME;wh();checkDuelLink();return}if(PNAME&&LS('ff_email')){wh();checkDuelLink();return}
+const d=document.createElement('div');d.id='nmo';d.innerHTML='<div class="bx2"><h1>Welcome, soldier!</h1><p>'+(USER?'Signed in with your claude.ai account.':'Playing as a guest.')+' Enter your name and email. The email is not verified, it only lets the admin and your duel opponents identify you.</p><input id="nmi" maxlength="16" placeholder="Player name" value="'+esc(PNAME)+'"><input id="nme" type="email" placeholder="you@example.com"><button id="nmb">ENTER THE ARENA</button><p id="nmx" style="color:#c00;margin:6px 0 0"></p></div>';document.body.appendChild(d);
+$('nmb').onclick=()=>{const v=$('nmi').value.trim(),em=$('nme').value.trim();if(!v||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){$('nmx').textContent='Enter a name and a valid email.';return}PNAME=v.slice(0,16);P.name=PNAME;LS('ff_name',PNAME);LS('ff_email',em);chkAdmin();adminUI();d.remove();wh();pReg();checkDuelLink()}}
+function renderAX(){$('axl').innerHTML=AGS.map(a=>{const e=BR[a[0]]||{},g=Object.assign({},G0,PRE[a[0]]||{},e.G||{}),live=bots.find(b=>b.name===a[0]),code=live?live.code:genCode({name:a[0],gen:e.gen||1,gun:GUNS[a[4]],G:g});
+return `<div class='rep2' style='border-style:solid'><b>${a[2]} ${a[0]}</b> \u00b7 ${a[4]} \u00b7 generation ${e.gen||1} \u00b7 ${e.m||0} matches, ${e.w||0} wins${live?' \u00b7 IN BATTLE':''}<br>aims at ${g.headBias>.6?'the head':g.headBias>.3?'the chest':'the body'} \u00b7 range ${Math.round(g.rangeKeep)} m \u00b7 strafe ${g.strafeAmp.toFixed(2)} \u00b7 cover ${g.coverSeek.toFixed(2)} \u00b7 react ${g.react.toFixed(2)} s \u00b7 remembers ${Object.keys(e.hot||{}).length} hotspots<br><small>${((e.log||[]).slice(-6).reverse().map(l=>new Date(l.t).toLocaleTimeString()+' gen '+l.g+': '+esc(l.x)).join('<br>'))||'No lessons yet.'}</small><details><summary>Show code (${code.split('\n').length} lines)</summary><pre style='max-height:300px;overflow:auto;font-size:11px;background:#fff;padding:8px'>${esc(code)}</pre></details></div>`}).join('');
+$('tka').innerHTML='<option value="all">All agents</option>'+AGS.map(a=>'<option>'+a[0]+'</option>').join('');$('gta').innerHTML=AGS.map(a=>'<option>'+a[0]+'</option>').join('')}
+$('pgad').insertAdjacentHTML('beforeend','<h2>LEARNING REPORT AND AGENT CODE</h2><div id="axl"></div><h2>TALK TO AGENTS</h2><div class="row2"><select id="tka"></select><input id="tki" placeholder="Try: be more aggressive, aim at the head, flank left, why did you lose?" style="flex:1;min-width:200px"><button id="tks">Send</button></div><div id="tkl"></div><h2>REPLAY TRAINING</h2><div class="row2"><span>The agent fights a ghost that repeats your recorded moves and shots, and changes its own moves after every failure until it wins.</span><select id="gta"></select><button id="gtl">\ud83c\udf93 Train on my last match</button></div><h2>DUEL RECORDS</h2><div id="adu"></div><h2>DOWNLOAD EVERYTHING</h2><div class="row2"><span>The whole page with every agent\'s current learned code, plus a list of what changed since your last download.</span><button id="dlb">\u2b07 Download index.html</button></div><textarea id="dlt" style="display:none;width:100%;height:150px"></textarea>');
+$('pgad').addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;
+if(b.id==='tks'){const q=$('tki').value.trim();if(q){$('tkl').insertAdjacentHTML('beforeend','<div class="rep2"><b>You:</b> '+esc(q)+'<br>'+talk(q,$('tka').value).map(esc).join('<br>')+'</div>');$('tki').value='';renderAX()}}
+if(b.id==='gtl')startGhostTrain(LASTREC,$('gta').value);if(b.id==='dlb')dlAll();if(b.dataset.gt&&DB){try{const[u,i]=b.dataset.gt.split('|'),s=await DB.doc('battles/'+u+'/rp/'+i).get();if(s.exists)startGhostTrain(s.data().rp,$('gta').value)}catch(e){}}});
+const la0=loadAdmin;loadAdmin=async function(){renderAX();await la0();document.querySelectorAll('#adb .row2').forEach(r=>{const k=r.querySelector('[data-rp]');if(k&&!r.querySelector('[data-gt]'))r.insertAdjacentHTML('beforeend','<button data-gt="'+k.dataset.rp+'">\ud83c\udf93 Train agent on this</button>')});
+try{const s=await DB.collection('duels').get();$('adu').innerHTML=s.docs.map(d=>d.data()).sort((x,y)=>y.ts-x.ts).map(d=>'<div class="row2"><b>'+esc(d.a.name)+' '+d.pa+' : '+d.pb+' '+esc(d.b.name||d.b.email)+'</b><span>'+d.status+(d.winner?' \u00b7 winner '+esc(d.winner):'')+' \u00b7 '+d.rounds.length+' rounds \u00b7 vs '+esc(d.agent)+'</span></div>').join('')||'No duels yet.'}catch(e){}};
+async function dlAll(){let src='';try{src=await(await fetch(location.href.split('#')[0])).text()}catch(e){}if(src.indexOf('<script')<0)src='<!doctype html>\n'+document.documentElement.outerHTML;
+const last=+LS('ff_dl')||0,ch=[];for(const n in BR)(BR[n].log||[]).forEach(l=>{if(l.t>last)ch.push(new Date(l.t).toISOString().slice(0,16)+' '+n+' gen '+l.g+': '+l.x)});ch.sort();
+const seed='<script id="seed">window.__SEED='+JSON.stringify({BR,GD,GR,BF}).replace(/</g,'\\u003c')+';</'+'script>';
+src=src.replace(/<script id=.seed.>[\s\S]*?<\/script>/,'').replace('<script>',seed+'\n<script>');const note='<!-- CHANGES since last download ('+new Date().toISOString()+'):\n'+(ch.join('\n')||'no new lessons')+'\n-->\n';LS('ff_dl',Date.now());$('dlt').style.display='block';$('dlt').value=note;
+for(const[name,text,type]of[['index.html',note+src,'text/html'],['changes.txt',note.replace(/<!--|-->/g,''),'text/plain']]){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;document.body.appendChild(a);a.click();a.remove()}}
+function openAva(){const d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:12;display:grid;place-items:center;background:#14142bcc;font-family:Trebuchet MS,system-ui,sans-serif';let n=Math.max(2,Math.min(4,cfg.ag.length)),pick=cfg.ag.slice(0,n);const bs='margin:4px;padding:8px 14px;border:3px solid #14142b;border-radius:12px;font:inherit;font-weight:700;color:#14142b;cursor:pointer;width:auto;';
+const draw=()=>{d.innerHTML=`<div style='background:#fff;border:4px solid #14142b;border-radius:24px;padding:22px 26px;width:min(520px,94vw);color:#14142b;box-shadow:0 10px 0 #14142b'><h2 style='margin:0 0 10px'>Agent vs Agent</h2><b>How many agents? </b>${[2,3,4].map(k=>`<button data-k='${k}' style='${bs}background:${n===k?'#ffd23f':'#fff'}'>${k}</button>`).join('')}<p><b>Pick ${n} agents</b> (${pick.length}/${n})</p><div>${AGS.map(a=>`<button data-a='${a[0]}' style='${bs}background:${pick.includes(a[0])?'#5be37d':'#fff'}'>${a[2]} ${a[0]} \u00b7 ${a[4]}</button>`).join('')}</div><button id='avok' style='${bs}background:#ff8a3d;margin-top:12px;width:100%;font-size:18px' ${pick.length===n?'':'disabled'}>START SETUP</button></div>`};
+d.onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.k){n=+b.dataset.k;pick=pick.slice(0,n)}else if(b.dataset.a){const i=pick.indexOf(b.dataset.a);if(i>=0)pick.splice(i,1);else{pick.push(b.dataset.a);if(pick.length>n)pick.shift()}}else if(b.id==='avok'&&pick.length===n){cfg.ag=pick.slice();cfg.mode='ava';hr();d.remove();showPg('mm');return}draw()};draw();document.body.appendChild(d)}
+$('mm').addEventListener('click',e=>{if(e.target.closest('[data-m=ava]')&&ADMIN)setTimeout(openAva,0)});
+{const M2=$('home').querySelector('main'),pg=document.createElement('div');pg.className='pg';pg.id='pgdu';pg.style.display='none';pg.innerHTML="<h1>DUELS</h1><p class='sub'>Challenge a friend by email. Each round you both play the same battleground against the same agent, and the faster win scores 1 point. Players take turns picking the battleground. First to 5 points wins and the result is saved. Duels are turn-based, not live.</p><div class='row2'><input id='due' type='email' placeholder='Opponent email' style='flex:1;min-width:180px'><select id='dum'></select><select id='dua'></select><button id='duc'>\u2694 Challenge</button></div><div id='dus' class='sub'></div><h2>MY DUELS</h2><div id='dul'></div>";M2.insertBefore(pg,$('go'));
+document.querySelector('#home nav').insertAdjacentHTML('beforeend','<button data-n="du">Duels</button>');document.querySelector('#home nav').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.dataset.n==='du')listDuels()});
+pg.onclick=async e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;if(b.id==='duc')return createDuel();if(d.dm){const sl=b.parentNode.querySelector('select');await upDuel(d.dm,x=>{x.cur.map=sl.value});return listDuels()}if(d.dp)return playDuel(d.dp)};
+$('mm').insertAdjacentHTML('afterend','<div class="sub" style="margin:8px 0"><label><input type="checkbox" id="mobc" style="width:auto"> \ud83d\udcf1 Play on phone / iPad (touch controls)</label></div>');$('mobc').checked=MOB;document.body.classList.toggle('mob',MOB);$('mobc').onchange=e=>{MOB=e.target.checked;document.body.classList.toggle('mob',MOB)}}
+async function upDuel(id,fn){const r=DB.doc('duels/'+id),s=await r.get();if(!s.exists)return null;const x=s.data();fn(x);await r.set(x);return x}
+async function createDuel(){const st=$('dus');if(!DB){st.textContent='Duels need the online database.';return}const em=$('due').value.trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){st.textContent='Enter a valid opponent email.';return}
+const id='d'+Date.now().toString(36),bf=BF[+$('dum').value]||BF[0],d={a:{uid:UID,name:PNAME||'Player',email:LS('ff_email')||''},b:{email:em,uid:'',name:''},agent:$('dua').value,pa:0,pb:0,rounds:[],cur:{ta:null,tb:null,map:bf.name},chooser:'a',status:'open',ts:Date.now()};
+try{await DB.doc('duels/'+id).set(d);const link=location.href.split('#')[0]+'#duel-'+id;st.innerHTML=`Duel created. <a href='${mailto(em,'Duel challenge from '+d.a.name,d.a.name+' challenged you to a duel (first to 5 points) in Field Trainer.\n\nOpen: '+link+'\n\nBattleground for round 1: '+bf.name)}'>\ud83d\udce7 Send the invite email</a> or share this link: ${esc(link)}`;listDuels()}catch(e){st.textContent='Could not create the duel: '+e.message}}
+async function listDuels(){const L=$('dul');if(!DB){$('dus').textContent='Duels need the online database: open the claude.ai link and sign in (not available on GitHub Pages).';L.textContent='';return}
+$('dum').innerHTML=BF.map((b,i)=>`<option value='${i}'>${esc(b.name)}</option>`).join('');$('dua').innerHTML=AGS.map(a=>`<option>${a[0]}</option>`).join('');
+try{const s=await DB.collection('duels').get(),em=(LS('ff_email')||'').toLowerCase();const mine=s.docs.map(d=>Object.assign({id:d.id},d.data())).filter(d=>d.a.uid===UID||d.b.uid===UID||d.b.email===em||ADMIN).sort((x,y)=>y.ts-x.ts);
+L.innerHTML=mine.map(d=>{const role=d.a.uid===UID?'a':(d.b.uid===UID||d.b.email===em)?'b':'',opp=role==='a'?(d.b.name||d.b.email):d.a.name,oe=role==='a'?d.b.email:d.a.email,me=role==='b'?d.pb:d.pa,op=role==='b'?d.pa:d.pb;let act='';
+if(d.status==='done')act='<b>'+esc(d.winner)+' won</b>';else if(role){if(d.cur.map==null)act=d.chooser===role?`<select>${BF.map(b=>`<option value='${esc(b.name)}'>${esc(b.name)}</option>`).join('')}</select><button data-dm='${d.id}'>Set battleground</button>`:'<i>Waiting for the opponent to pick the battleground</i>';else if(d.cur['t'+role]!=null)act='<i>Your round is done. Waiting for the opponent.</i>';else act=`<button data-dp='${d.id}'>\u25b6 Play my round (${esc(d.cur.map)})</button>`}
+return `<div class='row2'><b>${esc(role?'You':d.a.name)} ${me} : ${op} ${esc(opp)}</b><span>${d.status} \u00b7 vs ${esc(d.agent)} \u00b7 round ${d.rounds.length+1}</span>${act}${oe?`<a href='${mailto(oe,'Duel reminder','It is your turn in our Field Trainer duel: '+location.href.split('#')[0]+'#duel-'+d.id)}'>\ud83d\udce7 Remind</a>`:''}</div>`}).join('')||'No duels yet.'}catch(e){L.textContent='Could not load duels: '+e.message}}
+async function playDuel(id){try{const s=await DB.doc('duels/'+id).get();if(!s.exists)return;const d=s.data(),em=(LS('ff_email')||'').toLowerCase(),role=d.a.uid===UID?'a':'b';if(role==='b'&&!d.b.uid)await upDuel(id,x=>{x.b.uid=UID;x.b.name=PNAME||'Player'});
+const i=BF.findIndex(b=>b.name===d.cur.map);cfg.map=i<0?0:i;cfg.ag=[d.agent];cfg.mode='pva';DU={id,role};showPg('mm');hr();$('go').click()}catch(e){}}
+async function duelSubmit(t){const id=DU.id,role=DU.role;DU=null;let res=null;try{res=await upDuel(id,x=>{x.cur['t'+role]=t;const ta=x.cur.ta,tb=x.cur.tb;if(ta!=null&&tb!=null){const w=ta<tb?'a':tb<ta?'b':'';x.rounds.push({map:x.cur.map,ta,tb,w});if(w==='a')x.pa++;if(w==='b')x.pb++;x.cur={ta:null,tb:null,map:null};x.chooser=x.chooser==='a'?'b':'a';if(x.pa>=5||x.pb>=5){x.status='done';x.winner=x.pa>=5?x.a.name:(x.b.name||x.b.email)}}})}catch(e){}
+const el=document.createElement('div');el.className='rep';const my=res?(role==='a'?res.pa:res.pb):0,op=res?(role==='a'?res.pb:res.pa):0,oe=res?(role==='a'?res.b.email:res.a.email):'';el.innerHTML='<b>DUEL</b> '+(res?(res.status==='done'?esc(res.winner)+' won the duel '+my+' to '+op+'!':'Score: you '+my+' \u00b7 opponent '+op+'. First to 5 wins. '+(oe?'<a href="'+mailto(oe,'Your turn in our duel','Please play your round: '+location.href.split('#')[0]+'#duel-'+id)+'">\ud83d\udce7 Remind your opponent</a>':'')):'Could not save the round (needs the online database).');$('es').appendChild(el)}
+async function checkDuelLink(){const m=/^#duel-([a-z0-9]+)$/.exec(location.hash);if(!m||!DB)return;try{const s=await DB.doc('duels/'+m[1]).get();if(!s.exists)return;const d=s.data();if(d.b.uid||d.a.uid===UID)return;
+const o=document.createElement('div');o.id='nmo';o.innerHTML=`<div class='bx2'><h1>\u2694 Duel challenge</h1><p><b>${esc(d.a.name)}</b> challenged you: first to 5 points.<br>Battleground: ${esc(d.cur.map)} \u00b7 Agent: ${esc(d.agent)}</p><button id='dya'>ACCEPT</button><button id='dyn' style='background:#ff6b6b'>NOT NOW</button></div>`;document.body.appendChild(o);
+$('dyn').onclick=()=>o.remove();$('dya').onclick=async()=>{await upDuel(m[1],x=>{if(!x.b.uid){x.b.uid=UID;x.b.name=PNAME||'Player'}});o.remove();showPg('du');listDuels()}}catch(e){}}
+const tcn=document.createElement('div');tcn.id='tcn';tcn.innerHTML="<div id='jy'><i id='jk'></i></div><div id='lk'></div><div id='bt'><button data-t='fire' class='f'>FIRE</button><button data-t='ads'>AIM</button><button data-t='jump'>JUMP</button><button data-t='rel'>RELOAD</button><button data-t='gr'>NADE</button><button data-t='sw'>SWAP</button><button data-t='lv'>MENU</button></div><div id='sp'><button data-t='pv'>\u25c0</button><button data-t='nx'>\u25b6</button><button data-t='lv'>MENU</button></div>";document.body.appendChild(tcn);
+{const jy=$('jy'),jk=$('jk'),lk=$('lk');let jid=null,lid=null,lx=0,ly=0;const jm=e=>{const r=jy.getBoundingClientRect();let dx=(e.clientX-r.left-r.width/2)/(r.width/2),dy=(e.clientY-r.top-r.height/2)/(r.height/2);const m=Math.hypot(dx,dy);if(m>1){dx/=m;dy/=m}jk.style.transform='translate('+dx*40+'px,'+dy*40+'px)';keys.KeyW=dy<-.3;keys.KeyS=dy>.3;keys.KeyA=dx<-.3;keys.KeyD=dx>.3;keys.ShiftLeft=m>.95&&dy<-.5},jr=()=>{jid=null;jk.style.transform='';['KeyW','KeyS','KeyA','KeyD','ShiftLeft'].forEach(k=>keys[k]=0)};
+jy.onpointerdown=e=>{jid=e.pointerId;jy.setPointerCapture(e.pointerId);jm(e)};jy.onpointermove=e=>{if(e.pointerId===jid)jm(e)};jy.onpointerup=jy.onpointercancel=jr;
+lk.onpointerdown=e=>{lid=e.pointerId;lk.setPointerCapture(e.pointerId);lx=e.clientX;ly=e.clientY};lk.onpointermove=e=>{if(e.pointerId!==lid)return;P.yaw-=(e.clientX-lx)*.006;P.pitch=cl(P.pitch-(e.clientY-ly)*.006,-1.5,1.5);lx=e.clientX;ly=e.clientY};lk.onpointerup=lk.onpointercancel=()=>lid=null;
+tcn.addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b)return;e.preventDefault();AC.resume();const t=b.dataset.t;if(t==='fire'){fire=1;semi=1;tcFire=true}else if(t==='ads')adsM=!adsM;else if(t==='jump')keys.Space=1;else if(t==='rel')reload();else if(t==='gr')nade();else if(t==='sw')sw((cur+1)%lo.length);else if(t==='lv'){REC.on=false;fire=0;adsM=0;$('menu').click()}else if(t==='pv')specNext(-1);else if(t==='nx')specNext(1)});
+addEventListener('pointerup',()=>{if(tcFire){fire=0;tcFire=false}keys.Space=0});addEventListener('pointercancel',()=>{if(tcFire){fire=0;tcFire=false}keys.Space=0})}
+function tcUpdate(){const sp=SPEC(),on=MOB&&!home&&!RP.on&&!ended;tcn.style.display=on?'block':'none';$('jy').style.display=$('lk').style.display=$('bt').style.display=sp?'none':'';$('sp').style.display=sp?'flex':'none';$('ammo').style.display=$('cross').style.display=sp?'none':''}
+const loop0=loop;loop=function(t){tcUpdate();loop0(t)};
+$('go').addEventListener('click',()=>{try{AC.resume()}catch(e){}});
+// ===== v4: passcode, no-retreat code, test lab, telemetry, 100-word reports =====
+let ADM_OK=false,CAND=false,gateShown=false;
+const LAB={on:false,kind:'',ep:0,max:20,limit:60,wins:{A:0,B:0,T:0},name:'',t0:0};
+function chkAdmin(){const em=(LS('ff_email')||'').toLowerCase();if(ADMIN&&!ADM_OK){CAND=true;ADMIN=false}if(em===OWNER&&!SIM)CAND=true;if(!SIM)ADMIN=CAND&&ADM_OK;return ADMIN}
+function adminGate(next){gateShown=true;const d=document.createElement('div');d.id='nmo';d.innerHTML="<div class='bx2'><h1>Admin passcode</h1><p>Enter the passcode to turn on admin mode.</p><input id='pci' type='password' inputmode='numeric' placeholder='Passcode'><button id='pcb'>UNLOCK</button><button id='pcn' style='background:#ddd'>Continue as a normal player</button><p id='pcx' style='color:#c00;margin:6px 0 0'></p></div>";document.body.appendChild(d);
+$('pcb').onclick=()=>{if($('pci').value==='8901'){ADM_OK=true;chkAdmin();adminUI();d.remove();if(next)next()}else $('pcx').textContent='Wrong passcode.'};$('pcn').onclick=()=>{d.remove();if(next)next()};$('pci').onkeydown=e=>{if(e.key==='Enter')$('pcb').click()};$('pci').focus()}
+function askName(){if(!window.__ready){setTimeout(askName,0);return}chkAdmin();if(CAND&&!ADM_OK&&!gateShown){adminGate(askName);return}adminUI();
+if(ADMIN&&!SIM){if(!PNAME){PNAME='Admin';LS('ff_name',PNAME)}P.name=PNAME;wh();checkDuelLink();return}if(PNAME&&LS('ff_email')){wh();checkDuelLink();return}
+const d=document.createElement('div');d.id='nmo';d.innerHTML='<div class="bx2"><h1>Welcome, soldier!</h1><p>'+(USER?'Signed in with your claude.ai account.':'Playing as a guest.')+' Enter your name and email. The email is not verified, it only lets the admin and your duel opponents identify you.</p><input id="nmi" maxlength="16" placeholder="Player name" value="'+esc(PNAME)+'"><input id="nme" type="email" placeholder="you@example.com"><button id="nmb">ENTER THE ARENA</button><p id="nmx" style="color:#c00;margin:6px 0 0"></p></div>';document.body.appendChild(d);
+$('nmb').onclick=()=>{const v=$('nmi').value.trim(),em=$('nme').value.trim();if(!v||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){$('nmx').textContent='Enter a name and a valid email.';return}PNAME=v.slice(0,16);P.name=PNAME;LS('ff_name',PNAME);LS('ff_email',em);chkAdmin();d.remove();const fin=()=>{adminUI();wh();pReg();checkDuelLink()};if(CAND&&!ADM_OK&&!gateShown){adminGate(fin);return}fin()}}
+function genCode(b){const g=b.G,f=v=>(+v).toFixed(3),cf=Object.entries(GENES).map(([k,[a,z,d]])=>`const ${k} = ${f(g[k])}; // ${d} (${a} to ${z})`).join('\n');
+return `// ===== ${b.name} | generation ${b.gen} | weapon ${b.gun.n} =====
+// Written automatically from what this agent has learned. It only uses what it can see or hear.
+${cf}
+const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+const m = p;  // private memory that survives between decisions (10 decisions per second)
+m.burst = m.burst||0; m.pause = m.pause||0; m.dir = m.dir||1; m.flip = m.flip||0;
+const sniperFoe = s.seen && s.eGun==='sniper';
+const cover = Math.min(s.wallL, s.wallR) < 3.5;   // a wall within reach
+let state='PATROL', mv=0, str=0, turn=0, fire=false, ads=false, sprint=false, reload=false, say='';
+// ---- 1. choose a state from what I sense (no retreat: only step to cover when hurt) ----
+if (s.seen && s.hp<retreatHp && cover) state='RETREAT';
+else if (s.seen) state='ENGAGE';
+else if (s.hasMem && s.memAge<memoryTime) state='SEARCH';
+// ---- 2. act ----
+if (state==='ENGAGE' || state==='RETREAT') {
+  if (m.lastB===undefined) m.lastB = s.bearing;
+  const rate = (s.bearing-m.lastB)/0.1;   // how fast the enemy slides across my view
+  m.lastB = s.bearing;
+  turn = clamp(kp*s.bearing + lead*rate, -1, 1);
+  const want = rangeKeep * (sniperFoe ? (1-0.5*sniperRespect) : 1);
+  if (s.rng > want+tol) mv = closeIn; else mv = 0;   // close the gap or hold, never back away
+  m.flip -= 0.1;
+  if (m.flip<=0) { m.dir = -m.dir; m.flip = flipTime*(0.5+Math.random()); }
+  str = m.dir * strafeAmp * (sniperFoe ? 1+sniperRespect : 1);
+  if (coverSeek>0.5 && cover) str = (s.wallL<s.wallR ? -1 : 1) * 0.3 * coverSeek;
+  if (state==='RETREAT') { mv = 0; str = (s.wallL<s.wallR ? -1 : 1) * 0.8; }   // sidestep into cover, keep shooting
+  if (s.reloading) str = m.dir*0.9;
+  if (sniperFoe && s.rng>want+tol) sprint = true;
+  ads = s.gun==='sniper' && s.rng>adsRange;
+  const tolA = Math.max(0.012, Math.atan2(0.28, Math.max(s.rng,2)) * aimTol);   // how close the crosshair must be
+  if (m.pause>0) { m.pause--; }
+  else if (Math.abs(s.bearing) < tolA && !s.reloading) { fire=true; m.burst++; if (m.burst>=Math.round(burstLen*2)) { m.burst=0; m.pause=Math.round(burstPause*2); } }
+  if (fire) { str *= (1-stopToShoot); mv *= (1-0.5*stopToShoot); }
+  say = state==='RETREAT' ? 'Hurt. Sidestepping into cover and still shooting.' : 'Enemy in sight ('+Math.round(s.rng)+' m). '+(fire?'Firing. ':'Lining up the shot. ')+(mv>0?'Closing in':'Holding position')+(sniperFoe?' (sniper: moving fast, using walls)':'')+'.';
+} else if (state==='SEARCH') {
+  m.lastB = undefined;
+  turn = clamp(kp*s.bearing,-1,1);
+  mv = Math.abs(s.bearing)<0.8 ? 1 : 0.2;
+  sprint = sprintSearch>0.5;
+  str = flankBias*0.4;
+  say = (s.heard?'Heard shots. ':'Lost sight. ')+'Heading to where the enemy was last seen '+s.memAge.toFixed(0)+' s ago.';
+} else {
+  m.lastB = undefined;
+  const scan = scanSpeed*Math.sin(s.time*0.9);
+  if (s.hasHot && hotPull>0.05) { turn = hotPull*clamp(kp*s.hb,-1,1) + (1-hotPull)*scan; say = 'No contact. Checking a spot where enemies were seen before.'; }
+  else { turn = scan + 0.4*clamp(s.cb,-1,1); say = 'No contact. Scanning and patrolling.'; }
+  mv = patrolSpeed;
+  str = flankBias*0.3;
+}
+// ---- 3. stay safe ----
+if (s.wallF<1.4) { turn += (s.wallL>s.wallR ? 0.9 : -0.9); mv = Math.min(mv,0.2); say += ' (turning away from a wall)'; }
+if (s.zone<zoneMargin) { turn = clamp(kp*s.cb,-1,1); mv = 1; say = 'The arena is shrinking: moving to the centre.'; }
+if (s.am<=0 || (!s.seen && s.am < s.mag*reloadAt)) reload = true;
+return { mv, st:str, turn, fire, ads, sprint, reload, say };`}
+function initAgent(b,a){b.gk=a[4];b.gun=GUNS[b.gk];b.am=b.gun.m;b.reloading=0;b.pm={};b.mem=null;b.lock=0;b.win={sh:0,h:0,dd:0,dt:0};b.tSeen=null;b.react=null;b.born=clock;const sv=BR[b.name];b.G=Object.assign({},G0,PRE[b.name]||{},(sv&&sv.G)||{});b.gen=(sv&&sv.gen)||1;b.hot=Object.assign({},(sv&&sv.hot)||{});b.manual=false;clampG(b.G);b.snap=Object.assign({},b.G);setCode(b,genCode(b))}
+const ad0=adapt;adapt=function(b){if(b.frozen)return;ad0(b)};
+const bt1=bTick;bTick=function(b,dt){if(b.tgt){tgTick(b,dt);return}bt1(b,dt);if(b.s&&b.s.seen&&b.tSeen==null)b.tSeen=clock};
+const fr1=fireRay;fireRay=function(o,d,w,src,kn){if(src.tSeen!=null&&src.react==null&&src!==P)src.react=clock-src.tSeen;return fr1(o,d,w,src,kn)};
+const sgt0=startGhostTrain;startGhostTrain=function(r,n){$('end').style.display='none';sgt0(r,n)};
+$('menu').addEventListener('click',()=>{LAB.on=false});
+function chk(){if(LAB.on){labCheck();return}if(GT.on){gtCheck();return}const w=units().find(u=>u.kills>=cfg.goal);if(w)endMatch(w)}
+function tgTick(b,dt){b.gt+=dt;if(b.hp<=0)return;if(b.tgt==='strafe'||b.tgt==='jump'){b.x=b.x0+Math.sin(b.gt*1.4)*5*b.dir;push(b,.5);b.x=cl(b.x,-LX,LX)}b.fy=b.tgt==='jump'?((b.gt%1.1)/1.1<.6?Math.sin((b.gt%1.1)/1.1/.6*Math.PI)*1.5:0):0;b.g.position.set(b.x,b.fy,b.z)}
+function mkTarget(){const grp=makeBot('B');scene.add(grp);const t={name:'Target',t:'B',x:0,z:0,yaw:0,hp:MAXHP,kills:0,deaths:0,g:grp,tgt:'static',gt:0,rt:0,fy:0,x0:0,dir:1};grp.traverse(o=>o.userData.b=t);bots.push(t);return t}
+function freeSpot(){for(let i=0;i<40;i++){const x=rnd(-LX*.8,LX*.8),z=rnd(-LZ*.8,LZ*.8);if(Math.hypot(x-SP.R[0][0],z-SP.R[0][1])<10)continue;if(!solids.some(o=>{const g=o.geometry.parameters;return Math.abs(x-o.position.x)<g.width/2+.8&&Math.abs(z-o.position.z)<g.depth/2+.8}))return[x,z]}return[SP.B[0][0],SP.B[0][1]]}
+function labAgent(name,suffix,team,G){const a=AGS.find(x=>x[0]===name)||AGS[0],b=addBot(name+suffix,team,DEF,null);b.base=name+suffix;initAgent(b,a);if(G){b.G=Object.assign({},G);clampG(b.G);b.snap=Object.assign({},b.G);setCode(b,genCode(b))}return b}
+function labReset(){const A=LAB.a,B=LAB.b;[A,B].forEach(u=>{u.hp=MAXHP;u.g.visible=true;u.rt=0;u.kills=0;u.fy=0;u.slow=0;u.burn=0;if(u.gun){u.am=u.gun.m;u.reloading=0;u.mem=null;u.pm={};u.ms={sh:0,h:0,hd:0,dd:0,dt:0};u.win={sh:0,h:0,dd:0,dt:0};u.tSeen=null;u.react=null;u.born=clock}});spawn(A);
+if(B.tgt){const k=['static','strafe','jump'][LAB.ep%3],s=freeSpot();B.tgt=k;B.x=B.x0=s[0];B.z=s[1];B.gt=0;B.dir=Math.random()<.5?-1:1;B.g.position.set(B.x,0,B.z);B.g.rotation.y=Math.atan2(A.x-B.x,A.z-B.z)}else spawn(B);SHOTS=[];LAB.t0=clock}
+function labStart(){if(!ADMIN)return;const kind=$('lbk').value,name=$('lba').value,base=Object.assign({},G0,PRE[name]||{},(BR[name]&&BR[name].G)||{});
+LAB.on=true;LAB.kind=kind;LAB.name=name;LAB.ep=0;LAB.max=+$('lbn').value||0;LAB.limit=+$('lbt').value||60;LAB.wins={A:0,B:0,T:0};cfg.speed=+$('lbs').value;cfg.mode='ava';selfPlay=true;ended=false;home=false;GT.on=false;RP.on=false;DU=null;$('home').style.display='none';bots.splice(0).forEach(b=>scene.remove(b.g));layout(cfg.map);ZX=ZZ=99;learn=kind!=='version';
+const A=labAgent(name,kind==='twin'?' A':kind==='version'?' (now)':'','R',base);LAB.a=A;let B;
+if(kind==='twin')B=labAgent(name,' B','B',base);else if(kind==='version'){B=labAgent(name,' (v1)','B',(BR[name]&&BR[name].v&&BR[name].v.G)||Object.assign({},G0,PRE[name]||{}))}else if(kind==='hostile'){B=labAgent(name,' dummy','B',Object.assign({},G0,PRE[name]||{}));B.frozen=true}else B=mkTarget();
+LAB.b=B;sel=A;refresh();labReset();$('trn').textContent='TEST LAB \u00b7 '+kind+' \u00b7 episode 1'}
+function labCheck(){const A=LAB.a,B=LAB.b;let r=null;if(B.hp<=0)r='A';else if(A.hp<=0)r='B';else if(clock-LAB.t0>LAB.limit)r='T';if(r)labEnd(r)}
+function telAdd(b,won,dur){if(!b.ms||b.ghost||b.tgt)return;const key=b.base||b.name,e=BR[key]=BR[key]||{},t=e.tel=e.tel||{ep:0,w:0,sh:0,h:0,hd:0,dd:0,dt:0,rx:[],ttk:[],sv:[]},m=b.ms;t.ep++;if(won)t.w++;t.sh+=m.sh;t.h+=m.h;t.hd+=(m.hd||0);t.dd+=m.dd;t.dt+=m.dt;if(b.react!=null)t.rx.push(+b.react.toFixed(2));if(won)t.ttk.push(+dur.toFixed(1));t.sv.push(+dur.toFixed(1));['rx','ttk','sv'].forEach(k=>{if(t[k].length>60)t[k].shift()});LS('ff_br',JSON.stringify(BR))}
+function labEnd(r){const A=LAB.a,B=LAB.b,dur=clock-LAB.t0;LAB.wins[r]++;LAB.ep++;telAdd(A,r==='A',dur);if(B.gun)telAdd(B,r==='B',dur);
+if(LAB.kind==='twin'){const w=r==='A'?A:r==='B'?B:null;if(w)learnAfter(w);else{adapt(A);adapt(B)}}else if(LAB.kind!=='version'){adapt(A)}
+$('lbo').innerHTML='Episode '+LAB.ep+(LAB.max?' / '+LAB.max:'')+' \u00b7 '+LAB.kind+' \u00b7 A wins '+LAB.wins.A+' \u00b7 '+(B.gun?'B wins '+LAB.wins.B+' \u00b7 ':'target survived ')+LAB.wins.T+' timeouts \u00b7 agent A generation '+A.gen;$('trn').textContent='TEST LAB \u00b7 '+LAB.kind+' \u00b7 episode '+(LAB.ep+1)+' \u00b7 A '+LAB.wins.A+' : '+LAB.wins.B;
+if(LAB.max&&LAB.ep>=LAB.max){labFinish();return}labReset()}
+function labFinish(){LAB.on=false;ended=true;const A=LAB.a,B=LAB.b,n=LAB.name;if(LAB.kind==='twin'){const best=LAB.wins.A>=LAB.wins.B?A:B;BR[n]=Object.assign(BR[n]||{},{G:Object.assign({},best.G),gen:best.gen})}else if(LAB.kind!=='version'){BR[n]=Object.assign(BR[n]||{},{G:Object.assign({},A.G),gen:A.gen})}
+LS('ff_br',JSON.stringify(BR));const pc2=LAB.ep?Math.round(100*LAB.wins.A/LAB.ep):0;$('trn').textContent=LAB.kind==='version'?'\u2705 Current version won '+LAB.wins.A+' of '+LAB.ep+' ('+pc2+'%) against version 1':'\u2705 Test Lab finished: '+LAB.ep+' episodes, win rate '+pc2+'%'}
+function renderTel(){const sp=a=>{if(a.length<2)return'';const mx=Math.max(...a,1);return `<svg width='160' height='34'><polyline fill='none' stroke='#ff2e7e' stroke-width='2' points='${a.map((v,i)=>(i*160/(a.length-1)).toFixed(1)+','+(32-v/mx*30).toFixed(1)).join(' ')}'/></svg>`},bar=(p,c)=>`<span style='display:inline-block;width:110px;height:10px;background:#eee;border:1px solid #14142b;border-radius:6px;vertical-align:middle'><i style='display:block;height:100%;width:${Math.min(100,p)}%;background:${c};border-radius:5px'></i></span>`,av=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+$('tel').innerHTML=Object.keys(BR).filter(k=>BR[k].tel).map(k=>{const t=BR[k].tel,acc=t.sh?100*t.h/t.sh:0,hs=t.h?100*t.hd/t.h:0,wr=t.ep?100*t.w/t.ep:0;return `<div class='rep2' style='border-style:solid'><b>${esc(k)}</b> \u00b7 ${t.ep} episodes<br>Win rate ${wr.toFixed(0)}% ${bar(wr,'#3ddc84')} \u00b7 Accuracy ${acc.toFixed(0)}% ${bar(acc,'#2d7bff')} \u00b7 Headshots ${hs.toFixed(0)}% of hits ${bar(hs,'#ff9100')}<br>Reaction (first seen to first shot) ${(av(t.rx)*1000)|0} ms \u00b7 Time to kill ${av(t.ttk).toFixed(1)} s \u00b7 Survival ${av(t.sv).toFixed(1)} s \u00b7 Damage dealt / taken ${Math.round(t.dd)} / ${Math.round(t.dt)}<br>Survival trend ${sp(t.sv.slice(-30))}</div>`}).join('')||'No telemetry yet. Run the Test Lab or play a match.'}
+const rax0=renderAX;renderAX=function(){rax0();renderTel();$('lba').innerHTML=AGS.map(a=>'<option>'+a[0]+'</option>').join('')};
+$('pgad').insertAdjacentHTML('beforeend','<h2>TEST LAB (admin)</h2><div class="row2"><span>An automatic arena: it resets itself after every kill, death or timeout and runs endlessly. Target gym = static, moving and jumping targets. Twin self-play = two copies fight and teach each other. Version vs old = current brain against your saved version 1.</span></div><div class="row2"><select id="lbk"><option value="target">Target gym</option><option value="hostile">Hostile bot gym</option><option value="twin">Twin self-play</option><option value="version">Version vs old version</option></select><select id="lba"></select><label>episodes (0 = endless) <input id="lbn" type="number" value="20" min="0" style="width:70px"></label><label>time limit s <input id="lbt" type="number" value="60" min="10" style="width:70px"></label><select id="lbs"><option value="1">1x</option><option value="2">2x</option><option value="5">5x</option><option value="10" selected>10x</option><option value="20">20x</option><option value="99">MAX</option></select><button id="lbgo">\u25b6 Start</button><button id="lbstop">\u25a0 Stop</button><button id="lbsv">Save current as version 1</button></div><div id="lbo" class="sub"></div><h2>TELEMETRY DASHBOARD (admin)</h2><div id="tel"></div>');
+$('pgad').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.id==='lbgo')labStart();if(b.id==='lbstop'&&LAB.on)labFinish();if(b.id==='lbsv'){const n=$('lba').value,g=Object.assign({},G0,PRE[n]||{},(BR[n]&&BR[n].G)||{});BR[n]=BR[n]||{};BR[n].v={G:g,gen:BR[n].gen||1,t:Date.now()};LS('ff_br',JSON.stringify(BR));$('lbo').textContent='Saved the current '+n+' brain as version 1.'}});
+function codeDiff(b){const L=[];Object.keys(GENES).forEach((k,i)=>{const a=b.snap&&b.snap[k],z=b.G[k];if(a!=null&&Math.abs(a-z)>1e-6)L.push('line '+(3+i)+': const '+k+' '+(+a).toFixed(3)+' \u2192 '+(+z).toFixed(3))});return L}
+function why100(l,w){const lm=l.ms||{sh:0,h:0,dd:0,dt:0},wm=w.ms||{sh:0,h:0,dd:0,dt:0},la=ac(lm),wa=ac(wm),S=[`${l.name} lost to ${w.name} after ${REC.t|0} seconds on ${(BF[curMap]||BF[0]).name}.`,`${w.name} landed ${pc(wa)} of its shots while ${l.name} landed ${pc(la)}.`,`${w.name} dealt ${Math.round(wm.dd)} damage and took ${Math.round(wm.dt)}, while ${l.name} dealt ${Math.round(lm.dd)} and took ${Math.round(lm.dt)}.`];
+if((wm.hd||0)>(lm.hd||0))S.push(`The winner landed more headshots (${wm.hd||0} against ${lm.hd||0}), and a headshot hurts twice as much as a body shot.`);if(l.react!=null)S.push(`${l.name} needed ${(l.react*1000)|0} milliseconds to fire after first seeing the enemy.`);
+if(lm.sh<5)S.push(`${l.name} barely fired, so it never contested the fight.`);else if(la<.35)S.push('Its aim was loose, so most bullets passed the target instead of landing.');if(lm.dt>lm.dd)S.push('It stayed in the open and absorbed more damage than it gave back.');
+S.push(l===P?'Next time change your route so the agents cannot predict you, aim at the head, strafe while firing, and use a wall for cover before you reload. Fighting from a new angle makes the first shot yours.':'Next time it will tighten its aim, fire sooner after spotting the enemy, keep pressing forward, and use cover only when it is hurt and a wall is close.');return S.join(' ').split(/\s+/).slice(0,100).join(' ')}
+function pathPic(r){const bf=r.bf,cs=Math.floor(Math.min(340/bf.w,240/bf.h)),c=document.createElement('canvas');c.width=bf.w*cs;c.height=bf.h*cs;const g=c.getContext('2d');g.fillStyle='#f7f1df';g.fillRect(0,0,c.width,c.height);for(const k in bf.t){const[i,j]=k.split(',').map(Number);g.fillStyle=TT[bf.t[k]]?TT[bf.t[k]][1]:'#999';g.fillRect(i*cs,j*cs,cs,cs)}
+const X=x=>(x/10/2.5+bf.w/2)*cs,Z=z=>(z/10/2.5+bf.h/2)*cs,cols=['#ff2e7e','#2d7bff','#3ddc84','#ff9100','#b388ff'];r.names.forEach((n,u)=>{g.strokeStyle=cols[u%5];g.lineWidth=2;g.beginPath();r.fr.forEach((f,i)=>{const x=X(f[1+u*4]),z=Z(f[2+u*4]);if(i)g.lineTo(x,z);else g.moveTo(x,z)});g.stroke();g.fillStyle=cols[u%5];g.fillRect(X(r.fr[0][1+u*4])-4,Z(r.fr[0][2+u*4])-4,8,8)});
+return `<img src='${c.toDataURL()}' style='max-width:100%;border:3px solid #14142b;border-radius:10px'><div style='font-size:12px'>${r.names.map((n,u)=>`<span style='color:${cols[u%5]}'>\u25a0 ${esc(n)}</span>`).join(' &nbsp; ')} (squares = start points)</div>`}
+function extraEnd(w){if(!LAB.on)bots.forEach(b=>{if(b.ms&&!b.ghost&&!b.tgt)telAdd(b,w===b,REC.t)});if($('end').style.display!=='flex')return;const ava=cfg.mode==='ava',ag=bots.filter(b=>!b.ghost),losers=ava?ag.filter(b=>b!==w):(w===P?ag:[P]);let h='';
+for(const l of losers)h+=`<div class='rep'><b>WHY ${esc(l.name.toUpperCase())} LOST (about 100 words)</b><p style='margin:4px 0'>${esc(why100(l,w))}</p></div>`;
+for(const b of ag){const d=codeDiff(b);h+=`<div class='rep'><b>CODE CHANGES \u00b7 ${esc(b.name)} (generation ${b.gen})</b>${d.length?'<ul>'+d.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'<div>No setting changed this match.</div>'}</div>`}
+if(LASTREC&&LASTREC.fr.length>1)h+=`<div class='rep'><b>PATHS THIS MATCH</b><br>${pathPic(LASTREC)}</div>`;if(ADMIN&&LASTREC&&!ava)h+="<button id='etr' style='width:100%;margin-top:10px;padding:14px;font:inherit;font-weight:700;border:3px solid #14142b;border-radius:14px;background:#ffd23f;color:#14142b;cursor:pointer'>\ud83c\udf93 Make the agent train on this replay until it wins</button>";$('es').insertAdjacentHTML('beforeend',h)}
+const em1=endMatch;endMatch=function(w){em1(w);extraEnd(w)};
+$('es').addEventListener('click',e=>{if(e.target.id==='etr'){const a=bots.find(b=>!b.ghost&&!b.tgt);startGhostTrain(LASTREC,a?a.name:'HansArella')}});
+const cd0=createDuel;createDuel=async function(){await cd0();const a=$('dus').querySelector('a');if(a&&a.href.indexOf('mailto:')===0){try{a.click()}catch(e){}}};
+window.__ready=true;buildMap();fillLo();hr();requestAnimationFrame(loop);
 </script></body></html>
